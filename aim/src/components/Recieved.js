@@ -11,17 +11,12 @@ export default function Recieved() {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-
-
         <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+          Haha i'll lyk
+          <br/>
+          <small>sent 2 weeks ago</small>
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }
