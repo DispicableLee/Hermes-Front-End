@@ -4,7 +4,12 @@ import ChatSesh from './components/ChatShesh'
 
 function App() {
   return (
-    <div className="App">
+    <div 
+      className="App"
+      style={{
+        alignItems: "center"
+      }}
+      >
       <ChatSesh/>
     </div>
   );
