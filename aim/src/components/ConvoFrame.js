@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,10 +8,17 @@ import IconButton from "@mui/material/IconButton";
 import { red } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { TextField } from "@mui/material";
-import Sent from "./Sent";
-import Recieved from "./Recieved";
+import MsgSent from "./MsgSent";
+import MsgReceived from "./MsgReceived";
 
-export default function ChatSesh() {
+export default function ConvoFrame({ convoData }) {
+  // debugger
+  console.log(convoData.messages)
+
+  convoData.messages.map( msg => {
+    return(console.log(msg.content))
+  })
+
   return (
     <div>
       <Card
@@ -31,7 +38,7 @@ export default function ChatSesh() {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Group Chat Name"
+          title={convoData.title}
           subheader="Participants?"
         />
         <CardMedia
@@ -40,8 +47,28 @@ export default function ChatSesh() {
           image="/static/images/cards/paella.jpg"
           alt="Paella dish"
         />
-        <CardContent>
-          {/* ======================= chat session content goes here ========================= */}
+        {/* <CardContent> */}
+          
+          {/* {convoData.messages.map(msg => {
+            return (
+              <li>{msg.content}</li>
+            )
+          })} */}
+          
+          {/* {convoData.messages.map((msg, i) => {
+            let renderMessage; 
+            if (msg.sender == "Rohan") {
+              renderMessage = <MsgSent key={i} msg={msg} />;
+            } else {
+              renderMessage = <MsgReceived key={i} msg={msg} />;
+            }
+            return (
+              <div>
+                {renderMessage}
+              </div>
+            )
+          })} */}
+          {/* ======================= chat session content goes here =========================
           <aside
             style={{
               marginLeft: "20px",
@@ -49,7 +76,7 @@ export default function ChatSesh() {
               float: "right",
             }}
           >
-            <Sent />
+            <MsgSent />
           </aside>
           <aside
             style={{
@@ -57,7 +84,7 @@ export default function ChatSesh() {
               maxWidth: "50%",
             }}
           >
-            <Recieved />
+            <MsgReceived />
           </aside>
           <aside
             style={{
@@ -66,9 +93,8 @@ export default function ChatSesh() {
               float: "right",
             }}
           >
-            <Sent />
-          </aside>
-        </CardContent>
+          </aside> */}
+        {/* </CardContent> */}
       </Card>
       <TextField
         style={{

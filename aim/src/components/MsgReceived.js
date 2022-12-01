@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-export default function Recieved() {
+export default function MsgReceived() {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
