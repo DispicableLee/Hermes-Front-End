@@ -6,12 +6,22 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./App.css";
-import ChatSesh from "./components/ChatShesh";
-import ChatseshBar from './components/ChatseshBar'
-import ChatsechbarItem from './components/ChatseshbarItem'
+
+import ConvoFrame from "./components/ConvoFrame";
+import SideBar from './components/SideBar';
 import { useState, useEffect } from "react";
 
 function App() {
+  const [convoData, setConvoData] = useState({})
+
+  useEffect(() => {
+    fetch("http://localhost:3000/conversations/3")
+    // must change to sessions ID
+    .then((res) => res.json())
+    .then((data) => setConvoData(data))
+  }, [])
+
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -38,9 +48,9 @@ function App() {
           float: 'left'
         }}
       >
-        <ChatseshBar/>
+      <SideBar />
       </aside>
-      <ChatSesh />
+      <ConvoFrame convoData={convoData}/>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 
-export default function Sent() {
+export default function MsgSent() {
   return (
     
     <Card sx={{ minWidth: 275 }}>
