@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 // import { useNavigate } from "react-router-dom";
 
-function NavBar({ isLoggedIn }) {
+function NavBar({ isLoggedIn, setIsLoggedIn }) {
     // const navigate = useNavigate();
 
     function handleLogin() {
