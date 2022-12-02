@@ -8,13 +8,11 @@ import Main from "./Main";
 function App() {
 
   // const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("user-token") ? true : false);
-
- 
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <div>
-      <NavBar isLoggedIn={isLoggedIn} />
+      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <Main isLoggedIn={isLoggedIn} />
     </div>
   );
