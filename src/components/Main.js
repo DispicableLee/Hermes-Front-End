@@ -7,20 +7,33 @@ import Chats from './Chats';
 import Contacts from './Contacts';
 import Profile from './Profile';
 
-function Main( { isLoggedIn }) {
+function Main({ isLoggedIn }) {
     const [convoData, setConvoData] = useState({});
+    const [currentUser, setCurrentUser] = useState("");
 
     useEffect(() => {
         fetch("http://localhost:3000/conversations/3")
             // must change to sessions ID
             .then((res) => res.json())
             .then((data) => setConvoData(data))
-        }, [])
+    }, [])
 
-        function logUserIn(userObj) {
-        console.log('loggin in')
-        // fetch("http://localhost:3000/")
-        }
+    function logUserIn(userObj) {
+        // console.log('loggin in')
+        fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userObj)
+        })
+            .then(res => {
+                if (res.ok) {
+                    console.log(res)
+                    res.json().then(setCurrentUser(userObj.username))
+                } else {
+                    res.json().then(e => console.log(e))
+                }
+            })
+    }
 
     return (
         <Routes>
