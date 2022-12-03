@@ -6,14 +6,20 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-// import { useNavigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function NavBar({ isLoggedIn, setIsLoggedIn }) {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     function handleLogin() {
-        // console.log("logging in or out");
-        // navigate('/login');
+        if (isLoggedIn) {
+            fetch("http://localhost:3000/logout", { method: "DELETE" })
+            setIsLoggedIn(false)
+            navigate('/login')
+        } else {
+            navigate('/login');
+        }
     }
 
     return (
