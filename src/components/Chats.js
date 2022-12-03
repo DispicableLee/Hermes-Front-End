@@ -10,22 +10,22 @@ function Chats({ convoData }) {
         fetch("http://localhost:3000/messages/", {
             method: "POST",
             headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
+                "Content-Type": "application/json",
+                Accept: "application/json"
             },
             body: JSON.stringify({
-            user_id: "", // whoever is logged in right now
-            conversation_id: "", // 
-            content: message
+                user_id: "", // whoever is logged in right now
+                conversation_id: "", // 
+                content: message
             })
         })
     }
-    
-    return(
+
+    return (
         <div>
             <aside style={{ float: 'left' }}>
                 <ConvoFrame convoData={convoData} sendNewMessage={sendNewMessage} />
-                <ChatSideBar />
+                <ChatSideBar convoData={convoData} />
             </aside>
         </div>
     )
