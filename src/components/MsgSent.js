@@ -12,7 +12,10 @@ export default function MsgSent({ msg }) {
 
     return (
 
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ 
+            minWidth: 275, 
+            marginRight: '10px'
+            }}>
             <CardContent>
                 <Typography variant="body2">
                     {msg.content}
