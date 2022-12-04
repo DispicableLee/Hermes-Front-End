@@ -6,22 +6,22 @@ import NavBar from "./NavBar";
 import Main from "./Main";
 
 function App() {
-  // const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [user, setUser] = useState(null);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // auto-login
     fetch("http://localhost:3000/me").then((r) => {
       if (r.ok) {
-        r.json().then((isLoggedIn) => setIsLoggedIn(isLoggedIn));
+        r.json().then((user) => console.log(user));
       }
     });
   }, []);
 
   return (
     <div>
-      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <Main isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <NavBar user={user} setUser={setUser} />
+      <Main user={user} setUser={setUser} />
     </div>
   );
 }

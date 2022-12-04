@@ -7,20 +7,29 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 // import { Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function NavBar({ isLoggedIn, setIsLoggedIn }) {
-    const navigate = useNavigate();
+function NavBar({ user, setUser }) {
+    // const navigate = useNavigate();
 
-    function handleLogin() {
-        if (isLoggedIn) {
-            fetch("http://localhost:3000/logout", { method: "DELETE" })
-            setIsLoggedIn(false)
-            navigate('/login')
-        } else {
-            navigate('/login');
-        }
-    }
+    // function handleLogoutClick() {
+    //     if (isLoggedIn) {
+    //         fetch("http://localhost:3000/logout", { method: "DELETE" })
+    //         setIsLoggedIn(false)
+    //         navigate('/login')
+    //     } else {
+    //         navigate('/login');
+    //     }
+    // }
+
+    function handleLogoutClick() {
+        fetch("http://localhost:3000/logout", { method: "DELETE" })
+        .then((r) => {
+          if (r.ok) {
+            setUser(null);
+          }
+        });
+      }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -39,12 +48,22 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
                         hermes
                     </Typography>
 
-                    <Button
+                    <div>
+                        {user ? (
+                            <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
+                        ) : (
+                    <>
+                        <Link to="/signup">Signup</Link>
+                        <Link to="/login">Login</Link>
+                    </>
+                        )}
+                    </div>
+                    {/* <Button
                         color="inherit"
-                        onClick={handleLogin}
+                        onClick={handleLogoutClick}
                     >
                         {isLoggedIn ? "Logout" : "Login"}
-                    </Button>
+                    </Button> */}
 
                 </Toolbar>
             </AppBar>
