@@ -6,7 +6,7 @@ function Chats({ convoData }) {
   function sendNewMessage(message) {
     console.log("In App: ", message);
 
-    fetch("http://localhost:3000/messages/", {
+    fetch("/messages/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,8 +22,9 @@ function Chats({ convoData }) {
 
   return (
     <div>
-      <aside style={{ 
-        float: "left"}}>
+      <aside style={{
+        float: "left"
+      }}>
         <ChatSideBar />
       </aside>
       <ConvoFrame convoData={convoData} sendNewMessage={sendNewMessage} />

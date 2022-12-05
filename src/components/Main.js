@@ -31,7 +31,7 @@ function Main({ user, setUser }) {
     // }
 
     function getConversations(user) {
-        fetch(`http://localhost:3000/myconversations`)
+        fetch(`/myconversations`)
             .then(res => res.json())
             .then(data => {
                 setConvoData(data)
@@ -50,13 +50,13 @@ function Main({ user, setUser }) {
                     <Route path="/contacts" element={<Contacts />} />
                     <Route path="/profile" element={<Profile />} />
                 </Routes>
-                ) : (
+            ) : (
                 <Routes>
-                    <Route path="/signup" element={<SignUp setUser={setUser} />}/>
-                    <Route path="/login" element={<Login user={user} setUser={setUser} getConversations={getConversations}/>}/>
-                    <Route path="/" element={<Home />}/>
+                    <Route path="/signup" element={<SignUp setUser={setUser} />} />
+                    <Route path="/login" element={<Login user={user} setUser={setUser} getConversations={getConversations} />} />
+                    <Route path="/" element={<Home />} />
                 </Routes>
-                )
+            )
             }
         </main>
     )
