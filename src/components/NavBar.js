@@ -23,13 +23,13 @@ function NavBar({ user, setUser }) {
     // }
 
     function handleLogoutClick() {
-        fetch("http://localhost:3000/logout", { method: "DELETE" })
-        .then((r) => {
-          if (r.ok) {
-            setUser(null);
-          }
-        });
-      }
+        fetch("/logout", { method: "DELETE" })
+            .then((r) => {
+                if (r.ok) {
+                    setUser(null);
+                }
+            });
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -52,10 +52,10 @@ function NavBar({ user, setUser }) {
                         {user ? (
                             <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
                         ) : (
-                    <>
-                        <Link to="/signup">Signup</Link>
-                        <Link to="/login">Login</Link>
-                    </>
+                            <>
+                                <Link to="/signup">Signup</Link>
+                                <Link to="/login">Login</Link>
+                            </>
                         )}
                     </div>
                     {/* <Button

@@ -13,25 +13,29 @@ function Login({ user, setUser, getConversations }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("http://localhost:3000/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
         }).then(res => {
             if (res.ok) {
                 console.log(res);
-                res.json().then((user) => setUser(user));
-                getConversations(user);
-                setUser(true);
-                setPassword("");
-                navigate("/chats");
+                res.json().then(user => {
+                    // console.log(user)
+                    setUser(user)
+                    getConversations(user);
+                    setUser(true);
+                    setPassword("");
+                    navigate("/chats");
+
+                });
             } else {
                 res.json().then(e => console.log(e))
             }
         });
-      }
+    }
 
     return <div>
         <Card>
