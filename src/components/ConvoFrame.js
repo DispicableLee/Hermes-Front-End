@@ -12,13 +12,15 @@ import { TextField } from "@mui/material";
 import MsgSent from "./MsgSent";
 import MsgReceived from "./MsgReceived";
 
-function ConvoFrame({ selectedChat, sendNewMessage }) {
+function ConvoFrame({ user, selectedChat, sendNewMessage }) {
   const [newMessage, setNewMessage] = useState("");
 
   
   function handleSubmit(e) {
     e.preventDefault();
-    sendNewMessage(newMessage);  }
+    sendNewMessage(newMessage);
+    setNewMessage("")
+  }
   
   function handleChange(e) {
     setNewMessage(e.target.value);
@@ -58,7 +60,7 @@ function ConvoFrame({ selectedChat, sendNewMessage }) {
           <CardContent>
             {selectedChat.messages.map((msg, i) => {
               let renderMessage;
-              if (msg.sender === "David") {
+              if (msg.sender === user.username) {
                 renderMessage = (
                   <aside
                     // key={`message: ${selectedChat.id}`}

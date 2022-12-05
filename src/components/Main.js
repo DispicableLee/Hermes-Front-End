@@ -11,24 +11,6 @@ import SignUp from "./SignUp";
 function Main({ user, setUser }) {
     const [convoData, setConvoData] = useState({});
 
-    // function logUserIn(userObj) {
-    //     fetch("http://localhost:3000/login", {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json", },
-    //         body: JSON.stringify(userObj)
-    //     })
-    //         .then(res => {
-    //             if (res.ok) {
-    //                 console.log(res);
-    //                 res.json().then(setCurrentUser(userObj.username));
-    //                 getConversations(userObj.username);
-    //                 setUser(true);
-    //                 navigate("/chats");
-    //             } else {
-    //                 res.json().then(e => console.log(e))
-    //             }
-    //         });
-    // }
 
     function getConversations(user) {
         fetch(`/myconversations`)
@@ -45,10 +27,10 @@ function Main({ user, setUser }) {
             {user ? (
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/chats" element={<Chats convoData={convoData} />} />
+                    <Route path="/chats" element={<Chats user={user} convoData={convoData} />} />
                     <Route path="/login" element={<Login user={user} setUser={setUser} />} />
                     <Route path="/contacts" element={<Contacts />} />
-                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile" element={<Profile user={user} />} />
                 </Routes>
             ) : (
                 <Routes>
