@@ -18,8 +18,7 @@ function ConvoFrame({ selectedChat, sendNewMessage }) {
   
   function handleSubmit(e) {
     e.preventDefault();
-    sendNewMessage(newMessage);
-  }
+    sendNewMessage(newMessage);  }
   
   function handleChange(e) {
     setNewMessage(e.target.value);

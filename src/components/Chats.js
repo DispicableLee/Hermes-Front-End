@@ -12,20 +12,21 @@ function Chats({ convoData }) {
   }
 
   function sendNewMessage(message) {
-    console.log("In App: ", message);
-
-    fetch("/messages/", {
+    fetch("/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
       body: JSON.stringify({
-        user_id: "", // whoever is logged in right now
-        conversation_id: "", //
+        conversation_id: selectedChat.id,
         content: message,
       }),
-    });
+    }).then(res => res.json())
+    .then(newMessage => {
+      setSelectedChat({...selectedChat, messages: [...selectedChat.messages, newMessage]})
+    })
+    .catch(err => console.error(err));
   }
 
   return (
