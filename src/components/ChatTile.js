@@ -16,25 +16,23 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
-export default function RecipeReviewCard() {
-
+function ChatTile({ convo }) {
+  // debugger;
   return (
-    <Card sx={{ 
-        width: 350, 
-        maxHeight: 350
-        }}>
+    <Card sx={{ width: 350, maxHeight: 350}}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <Typography>
-            <small>Last Updated at</small>
-          </Typography>
-        }
-        title="Chat Title"
+        // avatar={convo.messages.map((message) => (
+        //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+        //     message.sender
+        //   </Avatar>
+        // ))}
+
+        // action={
+        //   <Typography>
+        //     <small>{convo.messages}</small>
+        //   </Typography>
+        // }
+        title={convo.title}
         subheader="September 14, 2016"
       />
       <CardContent>
@@ -50,3 +48,5 @@ export default function RecipeReviewCard() {
     </Card>
   );
 }
+
+export default ChatTile;

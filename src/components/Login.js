@@ -26,7 +26,7 @@ function Login({ user, setUser, getConversations }) {
                     // console.log(user)
                     setUser(user)
                     getConversations(user);
-                    setUser(true);
+                    // setUser(true);
                     setPassword("");
                     navigate("/chats");
 
