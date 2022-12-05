@@ -25,7 +25,7 @@ function Chats({ convoData }) {
       <aside style={{
         float: "left"
       }}>
-        <ChatSideBar />
+      <ChatSideBar convoData={convoData} />
       </aside>
       <ConvoFrame convoData={convoData} sendNewMessage={sendNewMessage} />
     </div>
