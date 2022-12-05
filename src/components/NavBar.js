@@ -10,17 +10,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useNavigate } from "react-router-dom";
 
 function NavBar({ user, setUser }) {
-    // const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    // function handleLogoutClick() {
-    //     if (isLoggedIn) {
-    //         fetch("http://localhost:3000/logout", { method: "DELETE" })
-    //         setIsLoggedIn(false)
-    //         navigate('/login')
-    //     } else {
-    //         navigate('/login');
-    //     }
-    // }
+    function handleEditProfileClick() {
+        navigate("/profile")
+    }
 
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" })
@@ -47,10 +41,12 @@ function NavBar({ user, setUser }) {
                     <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                         hermes
                     </Typography>
-
                     <div>
                         {user ? (
-                            <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
+                            <>
+                                <Button color="inherit" onClick={handleEditProfileClick}>Profile</Button>
+                                <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
+                            </>
                         ) : (
                             <>
                                 <Link to="/signup">Signup</Link>
@@ -58,13 +54,6 @@ function NavBar({ user, setUser }) {
                             </>
                         )}
                     </div>
-                    {/* <Button
-                        color="inherit"
-                        onClick={handleLogoutClick}
-                    >
-                        {isLoggedIn ? "Logout" : "Login"}
-                    </Button> */}
-
                 </Toolbar>
             </AppBar>
         </Box>

@@ -3,7 +3,7 @@ import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 
 
-function Chats({ convoData }) {
+function Chats({ user, convoData }) {
   const [selectedChat, setSelectedChat] = useState(convoData[0])
 
   function renderConversation(selectedConvoId) {
@@ -36,7 +36,7 @@ function Chats({ convoData }) {
       }}>
       <ChatSideBar convoData={convoData} renderConversation={renderConversation} />
       </aside>
-      <ConvoFrame selectedChat={selectedChat} sendNewMessage={sendNewMessage} />
+      <ConvoFrame user={user} selectedChat={selectedChat} sendNewMessage={sendNewMessage} />
     </div>
   );
 }
