@@ -30,7 +30,7 @@ function Main({ user, setUser }) {
                     <Route path="/chats" element={<Chats user={user} convoData={convoData} />} />
                     <Route path="/login" element={<Login user={user} setUser={setUser} />} />
                     <Route path="/contacts" element={<Contacts />} />
-                    <Route path="/profile" element={<Profile user={user} />} />
+                    <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
                 </Routes>
             ) : (
                 <Routes>

@@ -44,7 +44,7 @@ function NavBar({ user, setUser }) {
                     <div>
                         {user ? (
                             <>
-                                <Button color="inherit" onClick={handleEditProfileClick}>Profile</Button>
+                                <Button color="inherit" onClick={handleEditProfileClick}>Hi, {user.username}! Profile</Button>
                                 <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
                             </>
                         ) : (
