@@ -1,8 +1,16 @@
-import * as React from "react";
+import React, { useState } from "react";
 import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 
+
 function Chats({ convoData }) {
+  const [selectedChat, setSelectedChat] = useState(convoData[0])
+
+  function renderConversation(selectedConvoId) {
+    const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))
+    setSelectedChat(selectedConvo)
+  }
+
   function sendNewMessage(message) {
     console.log("In App: ", message);
 
@@ -25,9 +33,9 @@ function Chats({ convoData }) {
       <aside style={{
         float: "left"
       }}>
-      <ChatSideBar convoData={convoData} />
+      <ChatSideBar convoData={convoData} renderConversation={renderConversation} />
       </aside>
-      <ConvoFrame convoData={convoData} sendNewMessage={sendNewMessage} />
+      <ConvoFrame selectedChat={selectedChat} sendNewMessage={sendNewMessage} />
     </div>
   );
 }

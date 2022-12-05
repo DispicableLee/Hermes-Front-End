@@ -16,10 +16,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
-function ChatTile({ convo }) {
-  // debugger;
+function ChatTile({ convo, renderConversation }) {
+
+  function handleClick(){
+    renderConversation(convo.id)
+  }
+
   return (
-    <Card sx={{ width: 350, maxHeight: 350}}>
+    <Card sx={{ width: 350, maxHeight: 350}} onClick={handleClick}>
       <CardHeader
         // avatar={convo.messages.map((message) => (
         //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -33,17 +37,15 @@ function ChatTile({ convo }) {
         //   </Typography>
         // }
         title={convo.title}
-        subheader="September 14, 2016"
+        subheader={convo.most_recent_message.created_at}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Last Chat Message preview
+          {convo.most_recent_message.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
+
       </CardActions>
     </Card>
   );
