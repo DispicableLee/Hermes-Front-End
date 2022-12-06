@@ -113,7 +113,6 @@ function NavBar({ user, setUser }) {
           variant="persistent"
           anchor="left"
           open={open}
-          onBlur
         >
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
