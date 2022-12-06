@@ -26,10 +26,6 @@ function NavBar({ user, setUser }) {
             });
     }
 
-    function navigateToChats() {
-        navigate("/chats")
-    }
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color="error">
@@ -50,7 +46,8 @@ function NavBar({ user, setUser }) {
                         {user ? (
                             <>
                                 <Button color="inherit" onClick={handleEditProfileClick}>Hi, {user.username}! Profile</Button>
-                                <Button color="inherit" onClick={navigateToChats}>Chats</Button>
+                                <Button color="inherit" onClick={() => navigate("/chats")}>Chats</Button>
+                                <Button color="inherit" onClick={() => navigate("/contacts")}>Contacts</Button>
                                 <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
                             </>
                         ) : (
@@ -62,7 +59,7 @@ function NavBar({ user, setUser }) {
                     </div>
                 </Toolbar>
             </AppBar>
-        </Box>
+        </Box >
     )
 }
 
