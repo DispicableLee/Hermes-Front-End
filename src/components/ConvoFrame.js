@@ -46,7 +46,7 @@ function ConvoFrame({ user, selectedChat, sendNewMessage }) {
                 <MoreVertIcon />
               </IconButton>
             }
-            title={"ConvoTitle: " + selectedChat.title}
+            title={selectedChat.title}
             subheader={
               "Participants: " + selectedChat.users.map((u) => u.username).join(", ")
             }
