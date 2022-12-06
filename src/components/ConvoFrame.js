@@ -15,17 +15,17 @@ import MsgReceived from "./MsgReceived";
 function ConvoFrame({ user, selectedChat, sendNewMessage }) {
   const [newMessage, setNewMessage] = useState("");
 
-  
+
   function handleSubmit(e) {
     e.preventDefault();
     sendNewMessage(newMessage);
     setNewMessage("")
   }
-  
+
   function handleChange(e) {
     setNewMessage(e.target.value);
   }
-  
+
   if (!!selectedChat) {
     return (
       <div>
@@ -57,28 +57,25 @@ function ConvoFrame({ user, selectedChat, sendNewMessage }) {
             image=""
             alt=""
           /> */}
-          <CardContent>
+          <CardContent style={{ maxHeight: "600px", overflowY: "scroll", overflowX: "hidden" }}>
             {selectedChat.messages.map((msg, i) => {
               let renderMessage;
               if (msg.sender === user.username) {
                 renderMessage = (
                   <aside
-                    // key={`message: ${selectedChat.id}`}
                     style={{
-                      // marginLeft: "20px",
                       margin: "0 0 10px 10px",
                       maxWidth: "50%",
                       float: "right",
                       position: 'static'
                     }}
                   >
-                    <MsgSent key={msg.id} msg={msg} />
+                    <MsgSent key={`sent: ${msg.id}`} msg={msg} />
                   </aside>
                 );
               } else {
                 renderMessage = (
                   <aside
-                    // key={i + 10}
                     style={{
                       marginLeft: "20px",
                       maxWidth: "50%",
@@ -86,7 +83,7 @@ function ConvoFrame({ user, selectedChat, sendNewMessage }) {
                       position: "static",
                     }}
                   >
-                    <MsgReceived key={`message: ${msg.id}`} msg={msg} />
+                    <MsgReceived key={`rec: ${msg.id}`} msg={msg} />
                   </aside>
                 );
               }
@@ -113,7 +110,7 @@ function ConvoFrame({ user, selectedChat, sendNewMessage }) {
             </Button>
           </form>
         </Card>
-      </div>
+      </div >
     );
   }
 }

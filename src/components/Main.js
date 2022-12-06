@@ -24,22 +24,17 @@ function Main({ user, setUser }) {
 
     return (
         <main>
-            {user ? (
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/chats" element={<Chats user={user} convoData={convoData} />} />
-                    <Route path="/login" element={<Login user={user} setUser={setUser} />} />
-                    <Route path="/contacts" element={<Contacts />} />
-                    <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
-                </Routes>
-            ) : (
-                <Routes>
-                    <Route path="/signup" element={<SignUp setUser={setUser} />} />
-                    <Route path="/login" element={<Login user={user} setUser={setUser} getConversations={getConversations} />} />
-                    <Route path="/" element={<Home />} />
-                </Routes>
-            )
-            }
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/chats" element={<Chats user={user} convoData={convoData} />} />
+                <Route path="/login" element={<Login
+                    user={user}
+                    setUser={setUser}
+                    getConversations={getConversations} />} />
+                <Route path="/signup" element={<SignUp setUser={setUser} />} />
+                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
+            </Routes>
         </main>
     )
 };
