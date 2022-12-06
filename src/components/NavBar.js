@@ -21,8 +21,13 @@ function NavBar({ user, setUser }) {
             .then((r) => {
                 if (r.ok) {
                     setUser(null);
+                    navigate("/login")
                 }
             });
+    }
+
+    function navigateToChats() {
+        navigate("/chats")
     }
 
     return (
@@ -45,6 +50,7 @@ function NavBar({ user, setUser }) {
                         {user ? (
                             <>
                                 <Button color="inherit" onClick={handleEditProfileClick}>Hi, {user.username}! Profile</Button>
+                                <Button color="inherit" onClick={navigateToChats}>Chats</Button>
                                 <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
                             </>
                         ) : (
