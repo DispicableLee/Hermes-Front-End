@@ -10,14 +10,25 @@ import SignUp from "./SignUp";
 
 function Main({ user, setUser }) {
     const [convoData, setConvoData] = useState({});
+    const [reRun, setReRun] = useState(false);
 
-
-    function getConversations(user) {
+    useEffect(() => {
+        console.log("In Main.js:", reRun)
         fetch(`/myconversations`)
             .then(res => res.json())
             .then(data => {
                 setConvoData(data)
-                console.log(data)
+                // console.log(data)
+            })
+            .catch(e => console.error(e))
+    }, [reRun])
+
+    function getConversations() {
+        fetch(`/myconversations`)
+            .then(res => res.json())
+            .then(data => {
+                setConvoData(data)
+                // console.log(data)
             })
             .catch(e => console.error(e))
     }
@@ -26,13 +37,19 @@ function Main({ user, setUser }) {
         <main>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/chats" element={<Chats user={user} convoData={convoData} getConversations={getConversations}/>} />
+                <Route path="/chats" element={<Chats
+                    user={user}
+                    convoData={convoData}
+                    getConversations={getConversations}
+                    reRun={reRun}
+                    setReRun={setReRun}
+                />} />
                 <Route path="/login" element={<Login
                     user={user}
                     setUser={setUser}
                     getConversations={getConversations} />} />
                 <Route path="/signup" element={<SignUp setUser={setUser} />} />
-                <Route path="/contacts" element={<Contacts user={user}/>} />
+                <Route path="/contacts" element={<Contacts user={user} />} />
                 <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
             </Routes>
         </main>
