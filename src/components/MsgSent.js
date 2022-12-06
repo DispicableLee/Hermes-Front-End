@@ -6,9 +6,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { SettingsRemoteRounded } from '@mui/icons-material';
 
-
-export default function MsgSent({ msg }) {
+export default function MsgSent({ msg, deleteMessage }) {
     const [showEditIcon, setShowEditIcon] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [updatedMessage, setUpdatedMessage] = useState(msg.content);
@@ -42,7 +43,12 @@ export default function MsgSent({ msg }) {
                     <br />
                     <small>Time: {timeObj.time}</small>
                     {isEditMode ? <form><Button onSubmit={handleUpdateMessage}>Save</Button></form> : null}
-                    {showEditIcon ? <EditIcon onClick={editMessage} /> : null}
+                    {showEditIcon ?
+                        <>
+                            <EditIcon onClick={editMessage} />
+                            <DeleteIcon onClick={() => deleteMessage(msg.id)} />
+                        </>
+                        : null}
 
                 </Typography>
 

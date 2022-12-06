@@ -3,15 +3,11 @@ import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 
 
-function Chats({ user, convoData, getConversations }) {
-  const [selectedChat, setSelectedChat] = useState(convoData[0])
+function Chats({ user, convoData, getConversations, reRun, setReRun }) {
 
-  useEffect(()=> {
-    getConversations(user)
-    // fetch("/myconversations")
-    // .then(r => r.json())
-    // .then(console.log)
-  },[])
+  const [selectedChat, setSelectedChat] = useState(convoData[0]);
+
+  useEffect(() => getConversations(), [])
 
   function renderConversation(selectedConvoId) {
     const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))
@@ -30,10 +26,18 @@ function Chats({ user, convoData, getConversations }) {
         content: message,
       }),
     }).then(res => res.json())
-    .then(newMessage => {
-      setSelectedChat({...selectedChat, messages: [...selectedChat.messages, newMessage]})
+      .then(newMessage => {
+        setSelectedChat({ ...selectedChat, messages: [...selectedChat.messages, newMessage] })
+      })
+      .catch(err => console.error(err));
+  }
+
+  function deleteMessage(deletedMsgID) {
+    fetch(`/messages/${deletedMsgID}`, { method: "DELETE" })
+    setSelectedChat({
+      ...selectedChat,
+      messages: selectedChat.messages.filter(msg => msg.id !== deletedMsgID)
     })
-    .catch(err => console.error(err));
   }
 
   return (
@@ -41,9 +45,14 @@ function Chats({ user, convoData, getConversations }) {
       <aside style={{
         float: "left"
       }}>
-      <ChatSideBar convoData={convoData} renderConversation={renderConversation} />
+        <ChatSideBar convoData={convoData} renderConversation={renderConversation} />
       </aside>
-      <ConvoFrame user={user} selectedChat={selectedChat} sendNewMessage={sendNewMessage} />
+      <ConvoFrame
+        user={user}
+        selectedChat={selectedChat}
+        sendNewMessage={sendNewMessage}
+        deleteMessage={deleteMessage}
+      />
     </div>
   );
 }
