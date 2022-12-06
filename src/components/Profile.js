@@ -9,6 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import { TextField } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import EditProfileModal from './EditProfileModal';
+import AddContacts from './AddContacts'
 
 const style = {
     position: 'absolute',
@@ -66,7 +67,7 @@ function Profile({ user, setUser }) {
                     onClick={handleOpen}
                 />
             </Card>
-            
+            <AddContacts/>
             <Modal
                 open={open}
                 onClose={handleClose}
