@@ -28,46 +28,46 @@ import { Link, useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+    ({ theme, open }) => ({
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: `-${drawerWidth}px`,
+        ...(open && {
+            transition: theme.transitions.create('margin', {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+            marginLeft: 0,
+        }),
     }),
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  }),
 );
 //============================ drawer header styling =======================================
 const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
 }));
 
 function NavBar({ user, setUser }) {
-//=========================== handle open/close====================================
+    //=========================== handle open/close====================================
     const theme = useTheme();
     const [open, setOpen] = useState(false);
-    
+
     const handleDrawerOpen = () => {
-      setOpen(true);
+        setOpen(true);
     };
-    
+
     const handleDrawerClose = () => {
-      setOpen(false);
+        setOpen(false);
     };
-    
+
 
     const navigate = useNavigate()
 
@@ -86,88 +86,88 @@ function NavBar({ user, setUser }) {
     }
 
     return (
-    <div>
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="error">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        onClick={handleDrawerOpen}
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                        hermes
-                    </Typography>
-                    <div>
-                        {user ? (
-                            <>
-                                <Button color="inherit" onClick={handleEditProfileClick}>Hi, {user.username}! Profile</Button>
-                                <Button color="inherit" onClick={() => navigate("/chats")}>Chats</Button>
-                                <Button color="inherit" onClick={() => navigate("/contacts")}>Contacts</Button>
-                                <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
-                            </>
-                        ) : (
-                            <>
-                                <Link to="/signup">Signup</Link>
-                                <Link to="/login">Login</Link>
-                            </>
-                        )}
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </Box >
-        
-        <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-        </Box>
+        <div>
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static" color="error">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            onClick={handleDrawerOpen}
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                            hermes
+                        </Typography>
+                        <div>
+                            {user ? (
+                                <>
+                                    <Button color="inherit" onClick={handleEditProfileClick}>Hi, {user.username}! Profile</Button>
+                                    <Button color="inherit" onClick={() => navigate("/chats")}>Chats</Button>
+                                    <Button color="inherit" onClick={() => navigate("/contacts")}>Contacts</Button>
+                                    <Button color="inherit" onClick={handleLogoutClick}>Logout</Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/signup">Signup</Link>
+                                    <Link to="/login">Login</Link>
+                                </>
+                            )}
+                        </div>
+                    </Toolbar>
+                </AppBar>
+
+
+                <Drawer
+                    sx={{
+                        width: drawerWidth,
+                        flexShrink: 0,
+                        '& .MuiDrawer-paper': {
+                            width: drawerWidth,
+                            boxSizing: 'border-box',
+                        },
+                    }}
+                    variant="persistent"
+                    anchor="left"
+                    open={open}
+                >
+                    <DrawerHeader>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </DrawerHeader>
+                    <Divider />
+                    <List>
+                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider />
+                    <List>
+                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Drawer>
+            </Box>
         </div>
     )
 }
