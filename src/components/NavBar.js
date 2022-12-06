@@ -66,7 +66,10 @@ function NavBar({ user, setUser }) {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" color="error">
+        <AppBar 
+            position="static" 
+            color="error"
+            >
           <Toolbar>
             <IconButton
               size="large"
@@ -110,6 +113,7 @@ function NavBar({ user, setUser }) {
           variant="persistent"
           anchor="left"
           open={open}
+          onBlur
         >
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
@@ -123,13 +127,22 @@ function NavBar({ user, setUser }) {
           <Divider />
           <List>
 {/* ====================================== instantiating all the links ========================================= */}
-            <ListItemButton onClick={() => navigate("/profile")}>
+            <ListItemButton onClick={() => {
+                navigate("/profile")
+                handleDrawerClose()
+                }}>
                 Profile
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/contacts")}>
+            <ListItemButton onClick={() => {
+                navigate("/contacts")
+                handleDrawerClose()                
+                }}>
                 Contacts
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/chats")}>
+            <ListItemButton onClick={() => {
+                navigate("/chats")
+                handleDrawerClose()                    
+                }}>
                 Chats
             </ListItemButton>
             <ListItemButton onClick={handleLogoutClick}>
