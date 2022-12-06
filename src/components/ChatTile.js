@@ -25,17 +25,6 @@ function ChatTile({ convo, renderConversation }) {
   return (
     <Card sx={{ width: 350, maxHeight: 350}} onClick={handleClick}>
       <CardHeader
-        // avatar={convo.messages.map((message) => (
-        //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-        //     message.sender
-        //   </Avatar>
-        // ))}
-
-        // action={
-        //   <Typography>
-        //     <small>{convo.messages}</small>
-        //   </Typography>
-        // }
         title={convo.title}
         subheader={convo.most_recent_message.created_at}
       />
