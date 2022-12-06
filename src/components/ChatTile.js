@@ -26,7 +26,7 @@ function ChatTile({ convo, renderConversation }) {
     <Card sx={{ width: 350, maxHeight: 350}} onClick={handleClick}>
       <CardHeader
         title={convo.title}
-        subheader={convo.most_recent_message.created_at}
+        subheader={convo.most_recent_message_timestamp}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
