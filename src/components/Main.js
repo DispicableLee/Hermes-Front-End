@@ -32,7 +32,7 @@ function Main({ user, setUser }) {
                     setUser={setUser}
                     getConversations={getConversations} />} />
                 <Route path="/signup" element={<SignUp setUser={setUser} />} />
-                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/contacts" element={<Contacts user={user}/>} />
                 <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
             </Routes>
         </main>
