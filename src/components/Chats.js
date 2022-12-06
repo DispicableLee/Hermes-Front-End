@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 
 
-function Chats({ user, convoData }) {
+function Chats({ user, convoData, getConversations }) {
   const [selectedChat, setSelectedChat] = useState(convoData[0])
+
+  useEffect(()=> {
+    getConversations(user)
+    // fetch("/myconversations")
+    // .then(r => r.json())
+    // .then(console.log)
+  },[])
 
   function renderConversation(selectedConvoId) {
     const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))

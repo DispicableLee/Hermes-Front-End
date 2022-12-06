@@ -100,7 +100,7 @@ function NavBar({ user, setUser }) {
             </div>
           </Toolbar>
         </AppBar>
-
+{/* =============================== drawer ========================================== */}
         <Drawer
           sx={{
             width: drawerWidth,
@@ -113,6 +113,7 @@ function NavBar({ user, setUser }) {
           variant="persistent"
           anchor="left"
           open={open}
+          onMouseLeave={()=>handleDrawerClose()}
         >
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
@@ -144,7 +145,10 @@ function NavBar({ user, setUser }) {
                 }}>
                 Chats
             </ListItemButton>
-            <ListItemButton onClick={handleLogoutClick}>
+            <ListItemButton onClick={()=>{
+                handleLogoutClick()
+                handleDrawerClose()
+                }}>
                 Logout
             </ListItemButton>
           </List>

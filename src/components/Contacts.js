@@ -13,27 +13,29 @@ function Contacts({user}) {
   useEffect(() => {
     fetch("/mycontacts")
       .then((r) => r.json())
-      .then(setContactsList);
-    console.log(contactsList);
+      .then(contacts => {
+        console.log(contacts)
+        setContactsList(contacts)
+      });
   }, []);
 
 
-  function startConvo(id){
-    const newObj = {
-        title: "titleofchat",
-        participants: [user.id, id]
-    }
-    fetch("/conversations", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newObj)
-    })
-    .then((r)=>r.json())
-    .then(console.log)
+//   function startConvo(id){
+//     const newObj = {
+//         title: "titleofchat",
+//         participants: [user.id, id]
+//     }
+//     fetch("/conversations", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(newObj)
+//     })
+//     .then((r)=>r.json())
+//     .then(console.log)
 
-  }
+//   }
 
   const renderedContactsList = contactsList.map((friend) => {
     return (
@@ -41,17 +43,17 @@ function Contacts({user}) {
         <CardMedia
         component="img"
         height="200"
-        image={friend.friend.avatar_url}
-        alt={friend.friend.username}
+        image={friend.avatar_url}
+        alt={friend.username}
       />
         <CardContent>
             <Typography variant="body2" color="text.secondary">
-          {friend.friend.username}
+          {friend.username}
             </Typography>
         </CardContent>
         <Button
             variant="contained"
-            onClick={startConvo(friend.friend.id)}
+            // onClick={startConvo(friend.friend.id)}
         >
             Start Chat
         </Button>
