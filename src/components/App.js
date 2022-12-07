@@ -23,17 +23,12 @@ function App() {
 
   useEffect(() => {
     autoLogin()
-    }).catch(err => console.error(err));
-  };
-
-  useEffect(() => {
-    autoLogin()
   }, [])
 
   return (
     <div>
       <NavBar user={user} setUser={setUser} />
-      <Main user={user} setUser={setUser} autoLogin={autoLogin}/>
+      <Main user={user} setUser={setUser} autoLogin={autoLogin} />
     </div>
   );
 }

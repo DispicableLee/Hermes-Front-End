@@ -14,14 +14,23 @@ function Contacts({ user }) {
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
-
         // console.log(contacts)
-
         setContactsList(contacts)
       });
   }, []);
 
-
+  function acceptFriendRequest(friendID) {
+    fetch(`/contacts/${friendID}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        accepted: true
+      })
+    })
+      .then(r => r.json())
+      .then(console.log)
+      .catch(err => console.error(err))
+  }
   //   function startConvo(id){
   //     const newObj = {
   //         title: "titleofchat",
@@ -40,6 +49,12 @@ function Contacts({ user }) {
   //   }
 
   const renderedContactsList = contactsList.map((friend) => {
+    let contactStatus;
+    if (friend.contacts.contact_status) {
+      contactStatus = "Already a Friend"
+    } else {
+      contactStatus = "Accept Friend Request"
+    }
     return (
       <Card sx={{ maxWidth: 300 }} key={friend.username}>
         <CardMedia
@@ -58,6 +73,12 @@ function Contacts({ user }) {
         // onClick={startConvo(friend.friend.id)}
         >
           Start Chat
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => acceptFriendRequest(friend.id)}
+        >
+          {contactStatus}
         </Button>
         <br />
       </Card>
