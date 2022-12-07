@@ -22,6 +22,10 @@ export default function MsgSent({ msg, deleteMessage }) {
         setIsEditMode(true)
     }
 
+    function handleEditChange(e) {
+        setUpdatedMessage(e.target.value);
+    }
+
     function handleUpdateMessage(e) {
         e.preventDefault()
         console.log("hi, need to add logic for patch request to update message")
@@ -31,27 +35,34 @@ export default function MsgSent({ msg, deleteMessage }) {
 
     return (
 
-        <Card sx={{
-            minWidth: 275,
-            marginRight: '10px'
-        }}>
+        <Card sx={{ minWidth: 275, marginRight: '10px' }}>
             <CardContent
                 onMouseEnter={() => setShowEditIcon(true)}
-                onMouseLeave={() => setShowEditIcon(false)}>
-                <Typography variant="body2">
-                    {isEditMode ? <TextField variant="outlined" label="Edit" value={updatedMessage} /> : msg.content}
-                    <br />
+                onMouseLeave={() => setShowEditIcon(false)}
+            >
+                {/* <Typography /> */}
+                {isEditMode ? 
+                    <TextField 
+                        variant="outlined"
+                        // value={updatedMessage}
+                        onChange={handleEditChange} 
+                    /> 
+                : msg.content }
+                <br />
                     <small>Time: {timeObj.time}</small>
-                    {isEditMode ? <form><Button onSubmit={handleUpdateMessage}>Save</Button></form> : null}
-                    {showEditIcon ?
-                        <>
-                            <EditIcon onClick={editMessage} />
-                            <DeleteIcon onClick={() => deleteMessage(msg.id)} />
-                        </>
-                        : null}
-
-                </Typography>
-
+                {isEditMode ? 
+                    <form onSubmit={handleUpdateMessage}>
+                        <Button type="submit">
+                            Save
+                        </Button>
+                    </form> 
+                : null }
+                {showEditIcon ?
+                    <>
+                        <EditIcon onClick={editMessage} />
+                        <DeleteIcon onClick={() => deleteMessage(msg.id)} />
+                    </>
+                : null }
             </CardContent>
         </Card>
     );

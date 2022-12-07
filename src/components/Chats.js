@@ -7,7 +7,7 @@ function Chats({ user, convoData, getConversations, reRun, setReRun }) {
 
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
 
-  useEffect(() => getConversations(), [])
+  useEffect(() => getConversations(), [selectedChat])
 
   function renderConversation(selectedConvoId) {
     const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))
@@ -39,6 +39,8 @@ function Chats({ user, convoData, getConversations, reRun, setReRun }) {
       messages: selectedChat.messages.filter(msg => msg.id !== deletedMsgID)
     })
   }
+
+  // function editMessage() {}
 
   return (
     <div>
