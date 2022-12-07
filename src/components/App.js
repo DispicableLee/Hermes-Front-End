@@ -23,11 +23,6 @@ function App() {
 
   useEffect(() => {
     autoLogin()
-    }).catch(err => console.error(err));
-  };
-
-  useEffect(() => {
-    autoLogin()
   }, [])
 
   return (
@@ -37,5 +32,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

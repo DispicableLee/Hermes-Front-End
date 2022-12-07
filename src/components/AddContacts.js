@@ -14,75 +14,9 @@ import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { useState } from 'react';
+import NewContactForm from './NewContactForm';
 
-function NewContactForm(props) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [contacts, setContacts] = useState([])
-  const { onClose, selectedValue, open, contactsList } = props;
-
-  const handleClose = () => onClose(selectedValue);
-  const handleListItemClick = (value) => onClose(value);
-
-  const sendFriendRequest = (c) => {
-    console.log(c)
-    fetch(`/contacts`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        friend_id: c.id
-      })
-    })
-// if friend accepts friend request, then render to contacts list
-  }
-
-  const searchUser = () => {
-    fetch(`/users?query=${searchQuery}`)
-      .then(r => r.json())
-      .then(r => {
-        console.log(r)
-        setContacts(r)
-      })
-  };
-
-  return (
-    <Dialog onClose={handleClose} open={open}>
-      <TextField
-        placeholder='Search by Username'
-        value={searchQuery}
-        name="search"
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <Button variant='contained' onClick={searchUser}>Search</Button>
-      {/* ============================= mapping our users from get request ================================= */}
-      <List sx={{ pt: 0 }}>
-        {contacts.map(c => {
-          // if contacts from search query is already included in contactList state, then disable add friend option
-          const addFriendBtn = contactsList.find(con => con.username === c.username) ? <Button disabled>Already Friends</Button> : <Button variant='contained' onClick={e => sendFriendRequest(c)}>Add Friend</Button>
-
-          return (
-            <ListItem button onClick={() => handleListItemClick(c)} key={c.username}>
-              <ListItemAvatar>
-                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                  <PersonIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={c.username} />
-              {addFriendBtn}
-            </ListItem>
-          )
-        })}
-      </List>
-    </Dialog>
-  );
-}
-
-NewContactForm.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
-};
-
-export default function AddContacts({ contactsList }) {
+export default function AddContacts({ contactsList, setContactsList }) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState("");
 
@@ -107,6 +41,7 @@ export default function AddContacts({ contactsList }) {
         open={open}
         onClose={handleClose}
         contactsList={contactsList}
+        setContactsList={setContactsList}
       />
     </div>
   );
