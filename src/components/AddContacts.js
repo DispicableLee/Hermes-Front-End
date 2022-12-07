@@ -32,7 +32,7 @@ function NewContactForm(props) {
         friend_id: c.id
       })
     })
-
+// if friend accepts friend request, then render to contacts list
   }
 
   const searchUser = () => {
@@ -96,7 +96,7 @@ export default function AddContacts({ contactsList }) {
   return (
     <div>
       <Typography variant="subtitle1" component="div">
-        Selected: {selectedValue}
+        {selectedValue}
       </Typography>
       <br />
       <Button variant="outlined" onClick={handleClickOpen}>

@@ -8,12 +8,13 @@ import Main from "./Main";
 function App() {
   const [user, setUser] = useState(null);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const autoLogin = () => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then(user => {
-          // console.log(user)
+          console.log(user)
           setUser(user)
         });
       }
@@ -23,7 +24,11 @@ function App() {
   useEffect(() => {
     autoLogin()
     }).catch(err => console.error(err));
-  }, []);
+  };
+
+  useEffect(() => {
+    autoLogin()
+  }, [])
 
   return (
     <div>
