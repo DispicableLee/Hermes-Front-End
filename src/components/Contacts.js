@@ -14,7 +14,7 @@ function Contacts({user}) {
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
-        console.log(contacts)
+        // console.log(contacts)
         setContactsList(contacts)
       });
   }, []);

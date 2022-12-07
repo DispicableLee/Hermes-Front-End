@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -22,10 +22,20 @@ const style = {
     p: 4,
   };
 
-function Profile({ user, setUser }) {
+function Profile({ user, setUser, autoLogin }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    useEffect(() => {
+        // autoLogin(user)
+        fetch("/me")
+        .then((r) => r.json())
+        .then(r => {
+            console.log(r)
+            setUser(r)   
+        })
+    }, [])
 
     return (
         <div>

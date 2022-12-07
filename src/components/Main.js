@@ -8,7 +8,7 @@ import Contacts from './Contacts';
 import Profile from './Profile';
 import SignUp from "./SignUp";
 
-function Main({ user, setUser }) {
+function Main({ user, setUser, autoLogin }) {
     const [convoData, setConvoData] = useState({});
 
 
@@ -33,7 +33,7 @@ function Main({ user, setUser }) {
                     getConversations={getConversations} />} />
                 <Route path="/signup" element={<SignUp setUser={setUser} />} />
                 <Route path="/contacts" element={<Contacts user={user}/>} />
-                <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
+                <Route path="/profile" element={<Profile user={user} setUser={setUser} autoLogin={autoLogin}/>} />
             </Routes>
         </main>
     )
