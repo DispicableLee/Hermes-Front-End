@@ -6,46 +6,65 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { SettingsRemoteRounded } from '@mui/icons-material';
 
-
-export default function MsgSent({ msg }) {
+export default function MsgSent({ msg, deleteMessage, postUpdatedMessage }) {
     const [showEditIcon, setShowEditIcon] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [updatedMessage, setUpdatedMessage] = useState(msg.content);
+
     const timeObj = {
         date: msg.created_at.substring(0, 10),
         time: msg.created_at.substring(11, 16)
     }
 
-    function editMessage() {
-        setIsEditMode(true)
-    }
+    const editMessage = () => setIsEditMode(true);
+    const cancelEdit = () => setIsEditMode(false);
+
+    const handleEditChange = (e) => setUpdatedMessage(e.target.value);
 
     function handleUpdateMessage(e) {
         e.preventDefault()
-        console.log("hi, need to add logic for patch request to update message")
+        // console.log(msg)
+        postUpdatedMessage({ ...msg, content: updatedMessage })
         setIsEditMode(false)
         setShowEditIcon(false)
     }
 
     return (
 
-        <Card sx={{
-            minWidth: 275,
-            marginRight: '10px'
-        }}>
+        <Card sx={{ minWidth: 275, marginRight: '10px' }}>
             <CardContent
                 onMouseEnter={() => setShowEditIcon(true)}
-                onMouseLeave={() => setShowEditIcon(false)}>
-                <Typography variant="body2">
-                    {isEditMode ? <TextField variant="outlined" label="Edit" value={updatedMessage} /> : msg.content}
-                    <br />
-                    <small>Time: {timeObj.time}</small>
-                    {isEditMode ? <form><Button onSubmit={handleUpdateMessage}>Save</Button></form> : null}
-                    {showEditIcon ? <EditIcon onClick={editMessage} /> : null}
-
-                </Typography>
-
+                onMouseLeave={() => setShowEditIcon(false)}
+            >
+                {/* <Typography /> */}
+                {isEditMode ?
+                    <TextField
+                        variant="outlined"
+                        value={updatedMessage}
+                        onChange={handleEditChange}
+                    />
+                    : msg.content}
+                <br />
+                <small>Time: {timeObj.time}</small>
+                {isEditMode ?
+                    <form onSubmit={handleUpdateMessage}>
+                        <Button variant="contained" type="submit">
+                            Save
+                        </Button>
+                        <Button variant="contained" onClick={cancelEdit}>
+                            Cancel
+                        </Button>
+                    </form>
+                    : null}
+                {showEditIcon ?
+                    <>
+                        <EditIcon onClick={editMessage} />
+                        <DeleteIcon onClick={() => deleteMessage(msg.id)} />
+                    </>
+                    : null}
             </CardContent>
         </Card>
     );

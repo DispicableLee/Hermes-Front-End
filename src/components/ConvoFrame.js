@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,19 +11,42 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { TextField } from "@mui/material";
 import MsgSent from "./MsgSent";
 import MsgReceived from "./MsgReceived";
+import EmojiPicker from 'emoji-picker-react';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 
-function ConvoFrame({ user, selectedChat, sendNewMessage }) {
+function ConvoFrame({ user, selectedChat, sendNewMessage, deleteMessage, postUpdatedMessage }) {
   const [newMessage, setNewMessage] = useState("");
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const ref = useRef(null);
 
 
   function handleSubmit(e) {
     e.preventDefault();
     sendNewMessage(newMessage);
     setNewMessage("")
+    setShowEmojiPicker(false);
   }
 
   function handleChange(e) {
     setNewMessage(e.target.value);
+  }
+
+  const handleClickOutside = (e) => {
+    if (ref.current && !ref.current.contains(e.target)) {
+      setShowEmojiPicker(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+    return () => document.removeEventListener('click', handleClickOutside, true)
+  }, [])
+
+  const emojiPicker = showEmojiPicker ? <div ref={ref}><EmojiPicker onEmojiClick={e => addEmoji(e)} /></div> : null;
+  const chatHeight = showEmojiPicker ? "250px" : "600px";
+
+  function addEmoji(e) {
+    setNewMessage(newMessage => newMessage + e.emoji)
   }
 
   if (!!selectedChat) {
@@ -46,7 +69,7 @@ function ConvoFrame({ user, selectedChat, sendNewMessage }) {
                 <MoreVertIcon />
               </IconButton>
             }
-            title={"ConvoTitle: " + selectedChat.title}
+            title={selectedChat.title}
             subheader={
               "Participants: " + selectedChat.users.map((u) => u.username).join(", ")
             }
@@ -57,7 +80,7 @@ function ConvoFrame({ user, selectedChat, sendNewMessage }) {
             image=""
             alt=""
           /> */}
-          <CardContent style={{ maxHeight: "600px", overflowY: "scroll", overflowX: "hidden" }}>
+          <CardContent style={{ height: chatHeight, overflowY: "scroll", overflowX: "hidden" }}>
             {selectedChat.messages.map((msg, i) => {
               let renderMessage;
               if (msg.sender === user.username) {
@@ -69,8 +92,11 @@ function ConvoFrame({ user, selectedChat, sendNewMessage }) {
                       float: "right",
                       position: 'static'
                     }}
+
                   >
-                    <MsgSent key={`sent: ${msg.id}`} msg={msg} />
+                    <MsgSent key={`sent: ${msg.id}`} msg={msg} deleteMessage={deleteMessage}
+                      postUpdatedMessage={postUpdatedMessage}
+                    />
                   </aside>
                 );
               } else {
@@ -82,24 +108,28 @@ function ConvoFrame({ user, selectedChat, sendNewMessage }) {
                       float: "left",
                       position: "static",
                     }}
+
                   >
                     <MsgReceived key={`rec: ${msg.id}`} msg={msg} />
                   </aside>
                 );
               }
-              return <div>{renderMessage}</div>;
+              return <div key={`div: ${msg.id}`}>{renderMessage}</div>;
             })}
           </CardContent>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} >
+            {emojiPicker}
             <TextField
               variant="outlined"
               label="New Message"
               style={{
-                width: "80%",
+                width: "70%",
               }}
               value={newMessage}
               onChange={handleChange}
             />
+            <InsertEmoticonIcon onClick={() => setShowEmojiPicker(true)} />
+
             <Button
               variant="contained"
               color="success"
