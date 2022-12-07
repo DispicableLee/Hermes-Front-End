@@ -45,8 +45,8 @@ function Main({ user, setUser, autoLogin }) {
                     setUser={setUser}
                     getConversations={getConversations} />} />
                 <Route path="/signup" element={<SignUp setUser={setUser} />} />
-                <Route path="/contacts" element={<Contacts user={user}/>} />
-                <Route path="/profile" element={<Profile user={user} setUser={setUser} autoLogin={autoLogin}/>} />
+                <Route path="/contacts" element={<Contacts user={user} autoLogin={autoLogin} />} />
+                <Route path="/profile" element={<Profile user={user} setUser={setUser} autoLogin={autoLogin} />} />
 
             </Routes>
         </main>
