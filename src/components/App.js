@@ -18,6 +18,11 @@ function App() {
           setUser(user)
         });
       }
+    });
+  }
+
+  useEffect(() => {
+    autoLogin()
     }).catch(err => console.error(err));
   };
 
@@ -28,7 +33,7 @@ function App() {
   return (
     <div>
       <NavBar user={user} setUser={setUser} />
-      <Main user={user} setUser={setUser} />
+      <Main user={user} setUser={setUser} autoLogin={autoLogin}/>
     </div>
   );
 }
