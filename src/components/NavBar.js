@@ -92,10 +92,19 @@ function NavBar({ user, setUser }) {
                         <div>
                             {user ? (
                                 <>
-                                    <Typography color="inherit" onClick={handleEditProfileClick}>
+                                    <Avatar
+                                        style={{
+                                            float: "right"
+                                        }}
+                                        src={user.avatar_url}
+                                        onClick={() => navigate("/profile")}
+
+                                    ></Avatar>
+                                    <Typography color="inherit"
+                                        style={{ float: "right" }}
+                                        onClick={handleEditProfileClick}>
                                         Hi, {user.username}!
                                     </Typography>
-                                    <Avatar></Avatar>
                                 </>
                             ) : (
                                 <>

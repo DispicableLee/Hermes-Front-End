@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
+import AvatarGroup from '@mui/material/AvatarGroup';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
@@ -18,12 +19,16 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 function ChatTile({ convo, renderConversation }) {
 
-  function handleClick(){
+  function handleClick() {
     renderConversation(convo.id)
   }
 
+  const avatars = convo.users.map(user => {
+    return (<Avatar key={user.id} src={user.avatar_url} />)
+  })
+
   return (
-    <Card sx={{ width: 350, maxHeight: 350}} onClick={handleClick}>
+    <Card sx={{ width: 350, maxHeight: 350, margin: "20px" }} onClick={handleClick}>
       <CardHeader
         title={convo.title}
         subheader={convo.most_recent_message_timestamp}
@@ -33,10 +38,12 @@ function ChatTile({ convo, renderConversation }) {
           {convo.most_recent_message.content}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-
-      </CardActions>
-    </Card>
+      <AvatarGroup max={3} style={{ float: "left" }}>
+        {avatars}
+      </AvatarGroup>
+      {/* <CardActions disableSpacing> */}
+      {/* </CardActions> */}
+    </Card >
   );
 }
 
