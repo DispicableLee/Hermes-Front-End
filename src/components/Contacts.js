@@ -31,6 +31,7 @@ function Contacts({ user }) {
       .then(console.log)
       .catch(err => console.error(err))
   }
+  
   //   function startConvo(id){
   //     const newObj = {
   //         title: "titleofchat",
@@ -84,13 +85,12 @@ function Contacts({ user }) {
       </Card>
     );
   });
+
   return (
     <div>
-      <Card>
-        <CardHeader title="My Contacts" />
-        <AddContacts contactsList={contactsList} />
-        {renderedContactsList}
-      </Card>
+      <CardHeader title="My Contacts" />
+      <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
+      {renderedContactsList}
     </div>
   );
 }

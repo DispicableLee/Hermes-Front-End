@@ -3,7 +3,7 @@ import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 
 
-function Chats({ user, convoData, getConversations, reRun, setReRun }) {
+function Chats({ user, convoData, getConversations }) {
 
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
 

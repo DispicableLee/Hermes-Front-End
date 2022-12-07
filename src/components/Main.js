@@ -10,10 +10,8 @@ import SignUp from "./SignUp";
 
 function Main({ user, setUser, autoLogin }) {
     const [convoData, setConvoData] = useState({});
-    const [reRun, setReRun] = useState(false);
 
     useEffect(() => {
-        // console.log("In Main.js:", reRun)
         fetch(`/myconversations`)
             .then(res => res.json())
             .then(data => {
@@ -21,7 +19,7 @@ function Main({ user, setUser, autoLogin }) {
                 // console.log(data)
             })
             .catch(e => console.error(e))
-    }, [reRun])
+    }, [])
 
     function getConversations() {
         fetch(`/myconversations`)
@@ -41,8 +39,6 @@ function Main({ user, setUser, autoLogin }) {
                     user={user}
                     convoData={convoData}
                     getConversations={getConversations}
-                    reRun={reRun}
-                    setReRun={setReRun}
                 />} />
                 <Route path="/login" element={<Login
                     user={user}
