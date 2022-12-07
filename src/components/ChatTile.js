@@ -17,13 +17,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
-function ChatTile({ convo, renderConversation }) {
+function ChatTile({ user, convo, renderConversation }) {
 
   function handleClick() {
     renderConversation(convo.id)
   }
 
-  const avatars = convo.users.map(user => {
+  const avatars = convo.users.filter(u => {
+    return u.username !== user.username
+  }).map(user => {
     return (<Avatar key={user.id} src={user.avatar_url} />)
   })
 

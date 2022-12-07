@@ -4,20 +4,20 @@ import ChatTile from './ChatTile'
 // import Card from '@mui/material/Card';
 import { List, ListItem } from '@mui/material';
 
-function ChatSideBar({ convoData, renderConversation }) {
+function ChatSideBar({ user, convoData, renderConversation }) {
 
   if (convoData.length > 0) {
     return (
       <Box sx={{ width: '100%' }}>
-          <List>
-            {convoData.map((convo) => (
-              <ChatTile key={convo.id} convo={convo} renderConversation={renderConversation}>
-                {convo.title}
-              </ChatTile>
-            ))}
-          </List>
-        </Box>
-      );
+        <List>
+          {convoData.map((convo) => (
+            <ChatTile key={convo.id} user={user} convo={convo} renderConversation={renderConversation}>
+              {convo.title}
+            </ChatTile>
+          ))}
+        </List>
+      </Box>
+    );
   } else {
     return null;
   }
