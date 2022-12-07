@@ -13,7 +13,7 @@ function Main({ user, setUser }) {
     const [reRun, setReRun] = useState(false);
 
     useEffect(() => {
-        console.log("In Main.js:", reRun)
+        // console.log("In Main.js:", reRun)
         fetch(`/myconversations`)
             .then(res => res.json())
             .then(data => {

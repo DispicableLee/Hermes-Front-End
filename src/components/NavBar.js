@@ -41,7 +41,7 @@ function NavBar({ user, setUser }) {
     const [open, setOpen] = useState(false);
 
     const handleDrawerOpen = () => {
-        console.log(!!user)
+        // console.log(!!user)
         if (!!user) {
             setOpen(true);
         } else {
