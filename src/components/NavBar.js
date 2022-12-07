@@ -14,6 +14,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { Avatar } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -94,6 +95,7 @@ function NavBar({ user, setUser }) {
                                     <Typography color="inherit" onClick={handleEditProfileClick}>
                                         Hi, {user.username}!
                                     </Typography>
+                                    <Avatar></Avatar>
                                 </>
                             ) : (
                                 <>
