@@ -40,7 +40,24 @@ function Chats({ user, convoData, getConversations, reRun, setReRun }) {
     })
   }
 
-  // function editMessage() {}
+  function postUpdatedMessage(updatedMsg) {
+    fetch(`/messages/${updatedMsg.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: updatedMsg.content
+      })
+    })
+      .then(r => r.json())
+      .then(resMsg => {
+        setSelectedChat({
+          ...selectedChat,
+          messages: selectedChat.messages.map(msgObj => {
+            return msgObj.id === updatedMsg.id ? updatedMsg : msgObj
+          })
+        })
+      })
+  }
 
   return (
     <div>
@@ -54,6 +71,7 @@ function Chats({ user, convoData, getConversations, reRun, setReRun }) {
         selectedChat={selectedChat}
         sendNewMessage={sendNewMessage}
         deleteMessage={deleteMessage}
+        postUpdatedMessage={postUpdatedMessage}
       />
     </div>
   );

@@ -12,7 +12,7 @@ import { TextField } from "@mui/material";
 import MsgSent from "./MsgSent";
 import MsgReceived from "./MsgReceived";
 
-function ConvoFrame({ user, selectedChat, sendNewMessage, deleteMessage }) {
+function ConvoFrame({ user, selectedChat, sendNewMessage, deleteMessage, postUpdatedMessage }) {
   const [newMessage, setNewMessage] = useState("");
 
 
@@ -72,6 +72,7 @@ function ConvoFrame({ user, selectedChat, sendNewMessage, deleteMessage }) {
 
                   >
                     <MsgSent key={`sent: ${msg.id}`} msg={msg} deleteMessage={deleteMessage}
+                      postUpdatedMessage={postUpdatedMessage}
                     />
                   </aside>
                 );
