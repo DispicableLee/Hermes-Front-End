@@ -9,26 +9,25 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { SettingsRemoteRounded } from '@mui/icons-material';
 
-export default function MsgSent({ msg, deleteMessage }) {
+export default function MsgSent({ msg, deleteMessage, postUpdatedMessage }) {
     const [showEditIcon, setShowEditIcon] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [updatedMessage, setUpdatedMessage] = useState(msg.content);
+
     const timeObj = {
         date: msg.created_at.substring(0, 10),
         time: msg.created_at.substring(11, 16)
     }
 
-    function editMessage() {
-        setIsEditMode(true)
-    }
+    const editMessage = () => setIsEditMode(true);
+    const cancelEdit = () => setIsEditMode(false);
 
-    function handleEditChange(e) {
-        setUpdatedMessage(e.target.value);
-    }
+    const handleEditChange = (e) => setUpdatedMessage(e.target.value);
 
     function handleUpdateMessage(e) {
         e.preventDefault()
-        console.log("hi, need to add logic for patch request to update message")
+        // console.log(msg)
+        postUpdatedMessage({ ...msg, content: updatedMessage })
         setIsEditMode(false)
         setShowEditIcon(false)
     }
@@ -41,28 +40,31 @@ export default function MsgSent({ msg, deleteMessage }) {
                 onMouseLeave={() => setShowEditIcon(false)}
             >
                 {/* <Typography /> */}
-                {isEditMode ? 
-                    <TextField 
+                {isEditMode ?
+                    <TextField
                         variant="outlined"
-                        // value={updatedMessage}
-                        onChange={handleEditChange} 
-                    /> 
-                : msg.content }
+                        value={updatedMessage}
+                        onChange={handleEditChange}
+                    />
+                    : msg.content}
                 <br />
-                    <small>Time: {timeObj.time}</small>
-                {isEditMode ? 
+                <small>Time: {timeObj.time}</small>
+                {isEditMode ?
                     <form onSubmit={handleUpdateMessage}>
-                        <Button type="submit">
+                        <Button variant="contained" type="submit">
                             Save
                         </Button>
-                    </form> 
-                : null }
+                        <Button variant="contained" onClick={cancelEdit}>
+                            Cancel
+                        </Button>
+                    </form>
+                    : null}
                 {showEditIcon ?
                     <>
                         <EditIcon onClick={editMessage} />
                         <DeleteIcon onClick={() => deleteMessage(msg.id)} />
                     </>
-                : null }
+                    : null}
             </CardContent>
         </Card>
     );

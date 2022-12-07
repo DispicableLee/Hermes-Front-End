@@ -15,20 +15,25 @@ import { TextField } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { useState } from 'react';
 
-// const emails = ['username@gmail.com', 'user02@gmail.com'];
-
 function NewContactForm(props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [contacts, setContacts] = useState([])
-  const { onClose, selectedValue, open } = props;
+  const { onClose, selectedValue, open, contactsList } = props;
 
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
+  const handleClose = () => onClose(selectedValue);
+  const handleListItemClick = (value) => onClose(value);
 
-  const handleListItemClick = (value) => {
-    onClose(value);
-  };
+  const sendFriendRequest = (c) => {
+    console.log(c)
+    fetch(`/contacts`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        friend_id: c.id
+      })
+    })
+
+  }
 
   const searchUser = () => {
     fetch(`/users?query=${searchQuery}`)
@@ -50,28 +55,22 @@ function NewContactForm(props) {
       <Button variant='contained' onClick={searchUser}>Search</Button>
       {/* ============================= mapping our users from get request ================================= */}
       <List sx={{ pt: 0 }}>
-        {contacts.map(c => (
-          <ListItem button onClick={() => handleListItemClick(c)} key={c.username}>
-            <ListItemAvatar>
-              <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                <PersonIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={c.username} />
-            <Button
-              variant='contained'
-            >Add Friend</Button>
-          </ListItem>
-        ))}
+        {contacts.map(c => {
+          // if contacts from search query is already included in contactList state, then disable add friend option
+          const addFriendBtn = contactsList.find(con => con.username === c.username) ? <Button disabled>Already Friends</Button> : <Button variant='contained' onClick={e => sendFriendRequest(c)}>Add Friend</Button>
 
-        {/* <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-          <ListItemAvatar>
-            <Avatar>
-              <AddIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Add account" />
-        </ListItem> */}
+          return (
+            <ListItem button onClick={() => handleListItemClick(c)} key={c.username}>
+              <ListItemAvatar>
+                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={c.username} />
+              {addFriendBtn}
+            </ListItem>
+          )
+        })}
       </List>
     </Dialog>
   );
@@ -83,13 +82,11 @@ NewContactForm.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function AddContacts() {
+export default function AddContacts({ contactsList }) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState("");
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const handleClickOpen = () => setOpen(true);
 
   const handleClose = (value) => {
     setOpen(false);
@@ -109,6 +106,7 @@ export default function AddContacts() {
         selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
+        contactsList={contactsList}
       />
     </div>
   );
