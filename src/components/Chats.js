@@ -64,7 +64,7 @@ function Chats({ user, convoData, getConversations }) {
       <aside style={{
         float: "left"
       }}>
-        <ChatSideBar convoData={convoData} renderConversation={renderConversation} />
+        <ChatSideBar convoData={convoData} user={user} renderConversation={renderConversation} />
       </aside>
       <ConvoFrame
         user={user}
