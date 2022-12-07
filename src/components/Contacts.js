@@ -6,18 +6,34 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { CardMedia } from "@mui/material";
 import AddContacts from "./AddContacts";
+import ContactTile from "./ContactTile";
 import { useState, useEffect } from "react";
 
-function Contacts({ user }) {
+function Contacts({ user, autoLogin }) {
   const [contactsList, setContactsList] = useState([]);
+  const [friendAccepted, setFriendAccepted] = useState(false);
   useEffect(() => {
+    // autoLogin() ERROR: navigating from another route works. But refresh on /contacts does not work. User appears not to be defined.
+
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
-        // console.log(contacts)
-        setContactsList(contacts)
+        console.log(contacts)
+        if (!!contacts) {
+          const mappedContacts = contacts.map(obj => {
+
+            console.log(user.username, obj.friend)
+            if (obj.friend.username === user.username) {
+              return { ...obj.user, contact_status: obj.contact_status }
+            } else if (obj.user.username === user.username) {
+              return { ...obj.friend, contact_status: obj.contact_status }
+            }
+          })
+          console.log(mappedContacts)
+          setContactsList(mappedContacts)
+        }
       });
-  }, []);
+  }, [friendAccepted]);
 
   function acceptFriendRequest(friendID) {
     fetch(`/contacts/${friendID}`, {
@@ -28,10 +44,11 @@ function Contacts({ user }) {
       })
     })
       .then(r => r.json())
-      .then(console.log)
+      .then(friendAccepted => {
+        setFriendAccepted(param => !param)
+      })
       .catch(err => console.error(err))
   }
-  
   //   function startConvo(id){
   //     const newObj = {
   //         title: "titleofchat",
@@ -50,47 +67,21 @@ function Contacts({ user }) {
   //   }
 
   const renderedContactsList = contactsList.map((friend) => {
-    let contactStatus;
-    if (friend.contacts.contact_status) {
-      contactStatus = "Already a Friend"
-    } else {
-      contactStatus = "Accept Friend Request"
-    }
     return (
-      <Card sx={{ maxWidth: 300 }} key={friend.username}>
-        <CardMedia
-          component="img"
-          height="200"
-          image={friend.avatar_url}
-          alt={friend.username}
-        />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {friend.username}
-          </Typography>
-        </CardContent>
-        <Button
-          variant="contained"
-        // onClick={startConvo(friend.friend.id)}
-        >
-          Start Chat
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => acceptFriendRequest(friend.id)}
-        >
-          {contactStatus}
-        </Button>
-        <br />
-      </Card>
+      <ContactTile key={friend.id} friend={friend}
+        acceptFriendRequest={acceptFriendRequest}
+        user={user}
+      />
     );
-  });
 
+  });
   return (
     <div>
-      <CardHeader title="My Contacts" />
-      <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
-      {renderedContactsList}
+      <Card>
+        <CardHeader title="My Contacts" />
+        <AddContacts contactsList={contactsList} />
+        {renderedContactsList}
+      </Card>
     </div>
   );
 }
