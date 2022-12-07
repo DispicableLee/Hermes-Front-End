@@ -13,10 +13,13 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { blue } from '@mui/material/colors';
+import { useState } from 'react';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+// const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function NewContactForm(props) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [contacts, setContacts] = useState([])
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -27,36 +30,48 @@ function NewContactForm(props) {
     onClose(value);
   };
 
+  const searchUser = () => {
+    fetch(`/users?query=${searchQuery}`)
+      .then(r => r.json())
+      .then(r => {
+        console.log(r)
+        setContacts(r)
+      })
+  };
+
   return (
     <Dialog onClose={handleClose} open={open}>
       <TextField
-        placeholder='Search for users by Username'
+        placeholder='Search by Username'
+        value={searchQuery}
+        name="search"
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <Button variant='contained'>Search</Button>
-{/* ============================= mapping our users from get request ================================= */}
+      <Button variant='contained' onClick={searchUser}>Search</Button>
+      {/* ============================= mapping our users from get request ================================= */}
       <List sx={{ pt: 0 }}>
-        {emails.map((email) => (
-          <ListItem button onClick={() => handleListItemClick(email)} key={email}>
+        {contacts.map(c => (
+          <ListItem button onClick={() => handleListItemClick(c)} key={c.username}>
             <ListItemAvatar>
               <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={email} />
+            <ListItemText primary={c.username} />
             <Button
-                variant='contained'
+              variant='contained'
             >Add Friend</Button>
           </ListItem>
         ))}
 
-        <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
+        {/* <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
           <ListItemAvatar>
             <Avatar>
               <AddIcon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Add account" />
-        </ListItem>
+        </ListItem> */}
       </List>
     </Dialog>
   );
@@ -70,7 +85,7 @@ NewContactForm.propTypes = {
 
 export default function AddContacts() {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+  const [selectedValue, setSelectedValue] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);

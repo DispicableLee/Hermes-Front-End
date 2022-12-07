@@ -8,56 +8,55 @@ import { CardMedia } from "@mui/material";
 import AddContacts from "./AddContacts";
 import { useState, useEffect } from "react";
 
-function Contacts({user}) {
+function Contacts({ user }) {
   const [contactsList, setContactsList] = useState([]);
   useEffect(() => {
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
-        console.log(contacts)
         setContactsList(contacts)
       });
   }, []);
 
 
-//   function startConvo(id){
-//     const newObj = {
-//         title: "titleofchat",
-//         participants: [user.id, id]
-//     }
-//     fetch("/conversations", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(newObj)
-//     })
-//     .then((r)=>r.json())
-//     .then(console.log)
+  //   function startConvo(id){
+  //     const newObj = {
+  //         title: "titleofchat",
+  //         participants: [user.id, id]
+  //     }
+  //     fetch("/conversations", {
+  //         method: "POST",
+  //         headers: {
+  //             "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(newObj)
+  //     })
+  //     .then((r)=>r.json())
+  //     .then(console.log)
 
-//   }
+  //   }
 
   const renderedContactsList = contactsList.map((friend) => {
     return (
-      <Card sx={{maxWidth: 300}}>
+      <Card sx={{ maxWidth: 300 }} key={friend.username}>
         <CardMedia
-        component="img"
-        height="200"
-        image={friend.avatar_url}
-        alt={friend.username}
-      />
+          component="img"
+          height="200"
+          image={friend.avatar_url}
+          alt={friend.username}
+        />
         <CardContent>
-            <Typography variant="body2" color="text.secondary">
-          {friend.username}
-            </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {friend.username}
+          </Typography>
         </CardContent>
         <Button
-            variant="contained"
-            // onClick={startConvo(friend.friend.id)}
+          variant="contained"
+        // onClick={startConvo(friend.friend.id)}
         >
-            Start Chat
+          Start Chat
         </Button>
-        <br/>
+        <br />
       </Card>
     );
   });

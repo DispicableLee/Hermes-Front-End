@@ -10,15 +10,14 @@ function EditProfileModal({ user, setUser, handleClose }) {
   const [userData, setUserData] = useState({
     username: user.username,
     password: "",
-    passwordConfirm: "",
+    password_confirmation: "",
     email: user.email,
-    avatar: user.avatar_url
+    avatar_url: ""
   });
   const navigate = useNavigate();
 
   function handleChange(e) {
     setUserData({ ...userData, [e.target.name]: e.target.value })
-    // console.log(userData)
   }
 
   function handleSubmit(e) {
@@ -36,9 +35,9 @@ function EditProfileModal({ user, setUser, handleClose }) {
           setUserData({
             username: "",
             password: "",
-            passwordConfirm: "",
+            password_confirmation: "",
             email: "",
-            avatar: ""
+            avatar_url: ""
           })
           handleClose();
         });
@@ -90,7 +89,7 @@ function EditProfileModal({ user, setUser, handleClose }) {
             <TextField
               variant="outlined"
               type="password"
-              name="passwordConfirm"
+              name="password_confirmation"
               label="Confirm Password"
               value={userData.passwordConfirm}
               onChange={(e) => handleChange(e)}
@@ -102,7 +101,7 @@ function EditProfileModal({ user, setUser, handleClose }) {
               type="text"
               name="avatar_url"
               label="Profile Image"
-              value={userData.avatar}
+              value={userData.avatar_url}
               onChange={(e) => handleChange(e)}
             />
             <br />
