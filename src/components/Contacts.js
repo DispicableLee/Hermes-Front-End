@@ -64,7 +64,7 @@ function Contacts({ user }) {
     <div>
       <Card>
         <CardHeader title="My Contacts" />
-        <AddContacts />
+        <AddContacts contactsList={contactsList} />
         {renderedContactsList}
       </Card>
     </div>
