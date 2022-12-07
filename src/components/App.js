@@ -8,8 +8,7 @@ import Main from "./Main";
 function App() {
   const [user, setUser] = useState(null);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
+  const autoLogin = () => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
@@ -18,13 +17,18 @@ function App() {
           setUser(user)
         });
       }
+    });
+  }
+
+  useEffect(() => {
+    autoLogin()
     }).catch(err => console.error(err));
   }, []);
 
   return (
     <div>
       <NavBar user={user} setUser={setUser} />
-      <Main user={user} setUser={setUser} />
+      <Main user={user} setUser={setUser} autoLogin={autoLogin}/>
     </div>
   );
 }

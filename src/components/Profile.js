@@ -22,10 +22,20 @@ const style = {
     p: 4,
   };
 
-function Profile({ user, setUser }) {
+function Profile({ user, setUser, autoLogin }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    useEffect(() => {
+        // autoLogin(user)
+        fetch("/me")
+        .then((r) => r.json())
+        .then(r => {
+            console.log(r)
+            setUser(r)   
+        })
+    }, [])
 
     return (
         <div>
