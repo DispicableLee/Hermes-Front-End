@@ -5,10 +5,11 @@ import Button from "@mui/material/Button";
 import { CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function ContactTile({ user, friend, acceptFriendRequest }) {
+function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
     const navigate = useNavigate();
 
     function startChat() {
+        console.log(user, friend)
         fetch('/conversations', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -17,7 +18,17 @@ function ContactTile({ user, friend, acceptFriendRequest }) {
                 participants: [friend.id, user.id]
             })
         })
-        navigate("/chats")
+            .then(r => {
+                if (r.ok) {
+                    r.json().then(r => {
+                        console.log(r)
+                        // getConversations()
+                        navigate("/chats")
+                    })
+                } else {
+                    console.log(r)
+                }
+            })
     }
 
     let acceptedFriendBtn = friend.contact_status ?
