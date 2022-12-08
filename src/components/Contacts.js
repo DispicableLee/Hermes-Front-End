@@ -40,7 +40,7 @@ function Contacts({ user, autoLogin, getConversations }) {
       .then((r) => r.json())
       .then(contacts => {
         // console.log(contacts)
-        if (!!contacts) {
+        if (!!contacts && !!user) {
           const mappedContacts = contacts.map(obj => {
             // console.log(user.username, obj.friend)
             if (obj.friend.username === user.username) {
@@ -55,7 +55,7 @@ function Contacts({ user, autoLogin, getConversations }) {
           setContactsList(mappedContacts)
         }
       });
-  }, [friendAccepted, user.username]);
+  }, [friendAccepted, user]);
 
   function acceptFriendRequest(friendID) {
     fetch(`/contacts/${friendID}`, {
@@ -81,6 +81,7 @@ function Contacts({ user, autoLogin, getConversations }) {
     );
 
   });
+
   return (
     <div>
       <Card>
