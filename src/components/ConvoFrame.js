@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Box from '@mui/material/Box';
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";

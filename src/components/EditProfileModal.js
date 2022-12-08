@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button"
 import Card from "@mui/material/Card";
@@ -14,7 +13,7 @@ function EditProfileModal({ user, setUser, handleClose }) {
     email: user.email,
     avatar_url: ""
   });
-  const navigate = useNavigate();
+
 
   function handleChange(e) {
     setUserData({ ...userData, [e.target.name]: e.target.value })

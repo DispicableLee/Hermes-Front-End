@@ -4,10 +4,8 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { SettingsRemoteRounded } from '@mui/icons-material';
 
 export default function MsgSent({ msg, deleteMessage, postUpdatedMessage }) {
     const [showEditIcon, setShowEditIcon] = useState(false);

@@ -1,10 +1,6 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { CardMedia } from "@mui/material";
 import AddContacts from "./AddContacts";
 import ContactTile from "./ContactTile";
 import { useState, useEffect } from "react";
@@ -21,19 +17,20 @@ function Contacts({ user, autoLogin, getConversations }) {
         // console.log(contacts)
         if (!!contacts) {
           const mappedContacts = contacts.map(obj => {
-
             // console.log(user.username, obj.friend)
             if (obj.friend.username === user.username) {
               return { ...obj.user, contact_status: obj.contact_status }
             } else if (obj.user.username === user.username) {
               return { ...obj.friend, contact_status: obj.contact_status }
+            } else {
+              return null
             }
           })
           // console.log(mappedContacts)
           setContactsList(mappedContacts)
         }
       });
-  }, [friendAccepted]);
+  }, [friendAccepted, user.username]);
 
   function acceptFriendRequest(friendID) {
     fetch(`/contacts/${friendID}`, {
