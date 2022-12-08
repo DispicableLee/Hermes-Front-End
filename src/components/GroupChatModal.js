@@ -42,7 +42,7 @@ function GroupChatModal({ user, handleClose, contactsList }) {
             setNewGroupChat({ ...newGroupChat, participants: [...newGroupChat.participants, contactID] })
         }
     }
-    console.log(newGroupChat)
+    // console.log(newGroupChat)
 
     return (
         <div>
