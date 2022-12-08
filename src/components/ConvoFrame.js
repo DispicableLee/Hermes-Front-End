@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Box from '@mui/material/Box';
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -13,10 +14,27 @@ import MsgSent from "./MsgSent";
 import MsgReceived from "./MsgReceived";
 import EmojiPicker from 'emoji-picker-react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import EditConvoModal from "./EditConvoModal";
+import Modal from '@mui/material/Modal';
 
-function ConvoFrame({ user, selectedChat, sendNewMessage, deleteMessage, postUpdatedMessage }) {
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, deleteMessage, postUpdatedMessage }) {
   const [newMessage, setNewMessage] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const ref = useRef(null);
 
 
@@ -60,12 +78,11 @@ function ConvoFrame({ user, selectedChat, sendNewMessage, deleteMessage, postUpd
         >
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                R
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={selectedChat.convo_url}>
               </Avatar>
             }
             action={
-              <IconButton aria-label="settings">
+              <IconButton aria-label="settings" onClick={handleOpen}>
                 <MoreVertIcon />
               </IconButton>
             }
@@ -140,6 +157,20 @@ function ConvoFrame({ user, selectedChat, sendNewMessage, deleteMessage, postUpd
             </Button>
           </form>
         </Card>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <EditConvoModal
+              selectedChat={selectedChat}
+              setSelectedChat={setSelectedChat}
+              handleClose={handleClose} />
+
+          </Box>
+        </Modal>
       </div >
     );
   }

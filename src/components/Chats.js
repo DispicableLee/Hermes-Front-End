@@ -80,6 +80,7 @@ function Chats({ user, convoData, getConversations }) {
       <ConvoFrame
         user={user}
         selectedChat={selectedChat}
+        setSelectedChat={setSelectedChat}
         sendNewMessage={sendNewMessage}
         deleteMessage={deleteMessage}
         postUpdatedMessage={postUpdatedMessage}
