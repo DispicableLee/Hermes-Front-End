@@ -8,7 +8,8 @@ function ChatSideBar({ user, convoData, renderConversation }) {
 
   if (convoData.length > 0) {
     return (
-      <Box sx={{ maxWidth: '50%' }}
+      <Box
+        sx={{ maxWidth: '50%' }}
         style={{ margin: "auto" }}
       >
         <List>

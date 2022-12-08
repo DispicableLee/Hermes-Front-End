@@ -114,16 +114,15 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
                 renderMessage = (
                   <aside
                     style={{
-                      margin: "0 10px 10px 10px",
-                      maxWidth: "100%",
+                      margin: "0 0 10px 10px",
+                      minWidth: "51%",
                       float: "right",
-                      position: 'static'
+                      position: 'static',
+                      display: "block"
                     }}
-
                   >
                     <MsgSent key={`sent: ${msg.id}`} msg={msg} deleteMessage={deleteMessage}
                       postUpdatedMessage={postUpdatedMessage}
-                      style={{ display: "inline-block" }}
                     />
                   </aside>
                 );
@@ -132,12 +131,11 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
                   <aside
                     style={{
                       margin: "0 0 10px 10px",
-                      maxWidth: "70%",
+                      minWidth: "51%",
                       float: "left",
                       position: "static",
                       display: "block"
                     }}
-
                   >
                     <MsgReceived key={`rec: ${msg.id}`} msg={msg} />
                   </aside>

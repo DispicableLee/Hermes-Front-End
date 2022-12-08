@@ -8,6 +8,7 @@ import ContactTile from "./ContactTile";
 import Modal from '@mui/material/Modal';
 import GroupChatModal from "./GroupChatModal";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: 'absolute',
@@ -25,17 +26,14 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const [contactsList, setContactsList] = useState([]);
   const [friendAccepted, setFriendAccepted] = useState(false);
-
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
   const handleClose = (value) => {
     setOpen(false);
-    // setParticipantsArray();
   };
 
   useEffect(() => {
-    // autoLogin() ERROR: navigating from another route works. But refresh on /contacts does not work. User appears not to be defined.
-
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
@@ -70,6 +68,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
       .then(r => r.json())
       .then(friendAccepted => {
         setFriendAccepted(param => !param)
+        navigate("/chats")
       })
       .catch(err => console.error(err))
   }
