@@ -19,12 +19,15 @@ const StyledRoot = styled('div')(({ theme }) => ({
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
+    // maxHeight: '100vh',
   }));
   
 //   const transparent = alpha(color, 0.16);
   const StyledSection = styled('div')(({ theme }) => ({
     width: '100%',
     maxWidth: 480,
+    // height: 4,
+    maxHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -35,7 +38,9 @@ const StyledRoot = styled('div')(({ theme }) => ({
   const StyledContent = styled('div')(({ theme }) => ({
     maxWidth: 480,
     margin: 'auto',
-    minHeight: '100vh',
+    // minHeight: '100vh',
+    maxHeight: '100vh',
+    overflowY: 'hidden',
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
@@ -80,15 +85,15 @@ function Login({ user, setUser, getConversations }) {
     
     return (
         <>
-        {mdUp && (
-             <StyledSection>
-               <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-                 Hi, Welcome Back
-               </Typography>
-               <img src={loginImage} alt="login" />
-             </StyledSection>
-           )}
             <StyledRoot>
+            {mdUp && (
+                <StyledSection>
+                <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
+                    Hi, Welcome Back!
+                </Typography>
+                <img src={loginImage} alt="login" />
+                </StyledSection>
+            )}
                 <Container maxWidth="sm">
                 <CardHeader />
                     <StyledContent>
@@ -129,8 +134,8 @@ function Login({ user, setUser, getConversations }) {
                                     ),
                                   }}
                                 />
-                            </Stack>
                             <Button variant="contained" type="submit">Login</Button>
+                            </Stack>
                         </form>
                     </StyledContent>
                 </Container>
