@@ -83,7 +83,7 @@ function NavBar({ user, setUser, notifications }) {
                                         onClick={handleEditProfileClick}>
                                         Hi, {user.username}!
                                     </Typography>
-                                    <Badge badgeContent={notifications} color="primary" style={{ float: "right" }}>
+                                    <Badge badgeContent={notifications} color="success" style={{ float: "right" }}>
                                         <Avatar
                                             style={{
                                                 float: "right"

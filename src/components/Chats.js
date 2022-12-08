@@ -4,7 +4,7 @@ import ChatSideBar from "./ChatSideBar";
 import useResponsive from "./useResponsive";
 
 
-  
+
 function Chats({ user, autoLogin, convoData, getConversations }) {
   const mdUp = useResponsive('up', 'md');
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
@@ -79,7 +79,7 @@ function Chats({ user, autoLogin, convoData, getConversations }) {
       <aside style={{
         float: "left"
       }}>
-        {mdUp && 
+        {mdUp &&
           <ChatSideBar convoData={convoData} user={user} renderConversation={renderConversation} />
         }
       </aside>
