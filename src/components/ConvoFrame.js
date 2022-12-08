@@ -57,6 +57,7 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
   };
 
   useEffect(() => {
+    // autoLogin()
     const lastMsg = document.querySelector("#ChatContainer > div:last-child aside")
     if (!lastMsg) {
       return
@@ -83,6 +84,7 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
           sx={{ maxWidth: "50%" }}
           style={{
             margin: "auto",
+            transform: "translate(0%, 4%"
           }}
         >
           <CardHeader
@@ -106,15 +108,18 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
             image=""
             alt=""
           /> */}
-          <CardContent style={{ height: chatHeight, overflowY: "scroll", overflowX: "hidden" }} id="ChatContainer">
+          <CardContent style={{
+            height: chatHeight, overflowY: "scroll", overflowX: "hidden",
+            backgroundColor: "lightblue"
+          }} id="ChatContainer">
             {selectedChat.messages.map((msg, i) => {
               let renderMessage;
               if (msg.sender === user.username) {
                 renderMessage = (
                   <aside
                     style={{
-                      margin: "0 0 10px 10px",
-                      maxWidth: "50%",
+                      margin: "0 10px 10px 10px",
+                      maxWidth: "100%",
                       float: "right",
                       position: 'static'
                     }}
@@ -122,6 +127,7 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
                   >
                     <MsgSent key={`sent: ${msg.id}`} msg={msg} deleteMessage={deleteMessage}
                       postUpdatedMessage={postUpdatedMessage}
+                      style={{ display: "inline-block" }}
                     />
                   </aside>
                 );
@@ -129,10 +135,11 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
                 renderMessage = (
                   <aside
                     style={{
-                      marginLeft: "20px",
-                      maxWidth: "50%",
+                      margin: "0 0 10px 10px",
+                      maxWidth: "70%",
                       float: "left",
                       position: "static",
+                      display: "block"
                     }}
 
                   >
