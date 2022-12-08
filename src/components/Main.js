@@ -11,24 +11,20 @@ import SignUp from "./SignUp";
 function Main({ user, setUser, autoLogin }) {
     const [convoData, setConvoData] = useState({});
 
-    useEffect(() => {
-        fetch(`/myconversations`)
-            .then(res => res.json())
-            .then(data => {
-                setConvoData(data)
-                // console.log(data)
-            })
-            .catch(e => console.error(e))
-    }, [])
+    useEffect(() => getConversations(), [])
 
     function getConversations() {
-        fetch(`/myconversations`)
-            .then(res => res.json())
-            .then(data => {
-                setConvoData(data)
-                // console.log(data)
-            })
-            .catch(e => console.error(e))
+        if (user) {
+            fetch(`/myconversations`)
+                .then(res => res.json())
+                .then(data => {
+                    setConvoData(data)
+                    // console.log(data)
+                })
+                .catch(e => console.error(e))
+        } else {
+            setConvoData({}) // If user is not set, then clear convoData state
+        }
     }
 
     return (
