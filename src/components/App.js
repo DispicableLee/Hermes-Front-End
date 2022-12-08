@@ -1,29 +1,26 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-// import { Switch, Route } from "react-router-dom";
 import "../App.css";
 import NavBar from "./NavBar";
 import Main from "./Main";
 
 function App() {
   const [user, setUser] = useState(null);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const autoLogin = () => {
-    // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then(user => {
           // console.log(user)
           setUser(user)
         });
+      } else {
+        // console.log(r)
       }
     });
   }
 
-  useEffect(() => {
-    autoLogin()
-  }, [])
+  useEffect(() => autoLogin(), [])
 
   return (
     <div>

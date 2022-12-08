@@ -9,7 +9,7 @@ function Chats({ user, convoData, getConversations }) {
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
   // const [counter, setCounter] = useState(0)
 
-  useEffect(() => getConversations(), [selectedChat, getConversations])
+  useEffect(() => getConversations(), [selectedChat])
 
   // function timer() {
   //   const timerID = setInterval(() => {
