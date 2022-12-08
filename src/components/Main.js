@@ -33,6 +33,7 @@ function Main({ user, setUser, autoLogin, setNotifications }) {
                 <Route path="/" element={<Home />} />
                 <Route path="/chats" element={<Chats
                     user={user}
+                    autoLogin={autoLogin}
                     convoData={convoData}
                     getConversations={getConversations}
                 />} />
