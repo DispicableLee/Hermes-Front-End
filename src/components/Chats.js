@@ -4,12 +4,16 @@ import ChatSideBar from "./ChatSideBar";
 import useResponsive from "./useResponsive";
 
 
-function Chats({ user, convoData, getConversations }) {
+  
+function Chats({ user, autoLogin, convoData, getConversations }) {
   const mdUp = useResponsive('up', 'md');
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
   // const [counter, setCounter] = useState(0)
 
-  useEffect(() => getConversations(), [selectedChat])
+  useEffect(() => {
+    autoLogin()
+    getConversations()
+  }, [selectedChat])
 
   // function timer() {
   //   const timerID = setInterval(() => {

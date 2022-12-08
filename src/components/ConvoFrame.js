@@ -40,6 +40,8 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
     setShowEmojiPicker(false);
   }
 
+
+
   function handleChange(e) {
     setNewMessage(e.target.value);
   }
@@ -51,9 +53,17 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
   };
 
   useEffect(() => {
+    const lastMsg = document.querySelector("#ChatContainer > div:last-child aside")
+    if (!lastMsg) {
+      return
+    } else {
+      // console.log(lastMsg) 
+      lastMsg.scrollIntoView(false)
+    }
+
     document.addEventListener('click', handleClickOutside, true);
     return () => document.removeEventListener('click', handleClickOutside, true)
-  }, [])
+  }, [selectedChat, user])
 
   const emojiPicker = showEmojiPicker ? <div ref={ref}><EmojiPicker onEmojiClick={e => addEmoji(e)} /></div> : null;
   const chatHeight = showEmojiPicker ? "250px" : "600px";
@@ -92,7 +102,7 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
             image=""
             alt=""
           /> */}
-          <CardContent id="conversationCard" style={{ height: chatHeight, overflowY: "scroll", overflowX: "hidden" }}>
+          <CardContent style={{ height: chatHeight, overflowY: "scroll", overflowX: "hidden" }} id="ChatContainer">
             {selectedChat.messages.map((msg, i) => {
               let renderMessage;
               if (msg.sender === user.username) {

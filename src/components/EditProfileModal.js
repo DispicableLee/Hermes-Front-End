@@ -11,7 +11,7 @@ function EditProfileModal({ user, setUser, handleClose }) {
     password: "",
     password_confirmation: "",
     email: user.email,
-    avatar_url: ""
+    avatar_url: user.avatar_url
   });
 
 

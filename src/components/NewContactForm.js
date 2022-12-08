@@ -41,7 +41,7 @@ function NewContactForm(props) {
     fetch(`/users?query=${searchQuery}`)
       .then(r => r.json())
       .then(r => {
-        console.log(r)
+        // console.log(r)
         setContacts(r)
       })
   };
@@ -59,7 +59,7 @@ function NewContactForm(props) {
       <List sx={{ pt: 0 }}>
         {contacts.map(c => {
           // if contacts from search query is already included in contactList state, then disable add friend option
-          const addFriendBtn = contactsList.find(con => con.username === c.username) ? <Button disabled>Already Friends</Button> : <Button variant='contained' onClick={e => sendFriendRequest(c)}>Add Friend</Button>
+          const addFriendBtn = contactsList.find(con => con.username === c.username) ? <Button disabled>My Contact</Button> : <Button variant='contained' onClick={e => sendFriendRequest(c)}>Add Friend</Button>
 
           return (
             <ListItem key={c.username}>
