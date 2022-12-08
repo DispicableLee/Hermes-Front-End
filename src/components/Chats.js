@@ -3,12 +3,15 @@ import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 
 
-function Chats({ user, convoData, getConversations }) {
+function Chats({ user, autoLogin, convoData, getConversations }) {
 
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
   // const [counter, setCounter] = useState(0)
 
-  useEffect(() => getConversations(), [selectedChat])
+  useEffect(() => {
+    autoLogin()
+    getConversations()
+  }, [selectedChat])
 
   // function timer() {
   //   const timerID = setInterval(() => {
