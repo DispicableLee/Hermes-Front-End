@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
+import useResponsive from "./useResponsive";
 
 
 function Chats({ user, convoData, getConversations }) {
-
+  const mdUp = useResponsive('up', 'md');
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
   // const [counter, setCounter] = useState(0)
 
@@ -74,8 +75,9 @@ function Chats({ user, convoData, getConversations }) {
       <aside style={{
         float: "left"
       }}>
-        <ChatSideBar convoData={convoData} user={user} renderConversation={renderConversation} />
-
+        {mdUp && 
+          <ChatSideBar convoData={convoData} user={user} renderConversation={renderConversation} />
+        }
       </aside>
       <ConvoFrame
         user={user}

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import { TextField } from "@mui/material";
-import CardMedia from "@mui/material/CardMedia";
+import { Box, Card, CardContent, CardHeader, CardMedia, Modal, Stack, TextField } from '@mui/material';
 import EditProfileModal from './EditProfileModal';
+import useResponsive from './useResponsive';
+import palette from '../theme/palette';
+import { styled, alpha } from '@mui/material/styles';
 
 const style = {
     position: 'absolute',
@@ -20,10 +17,14 @@ const style = {
     p: 4,
 };
 
+const color = palette.grey[500];
+
 function Profile({ user, setUser, autoLogin }) {
+    // const mdUp = useResponsive('up', 'md');
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const mdUp = useResponsive('up', 'md');
 
     useEffect(() => {
         // autoLogin(user)
@@ -43,44 +44,61 @@ function Profile({ user, setUser, autoLogin }) {
     }
 
     return (
-        <div>
-            <Card>
-                <CardHeader title="My Profile" />
+        <div style={{margin: '0 35%'}}>
+            {mdUp && 
+            <Card
+                style={{
+                    boxShadow: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}`,
+                    // width: '50%',
+                    margin: 'auto',
+                    marginTop: '5%',
+                    padding: '5%',
+                    justifyContent: 'center',
+                    display: 'inline-block',
+                    // flexDirection: 'column'
+                }}
+            
+            >
+                <CardHeader title="My Profile" style={{ textAlign: 'center' }}/>
                 <CardContent>
                     <CardMedia
                         component="img"
                         sx={{
-                            height: 350,
-                            width: 350,
+                            width: '1500px',
+                            height: '1500px',
+                            borderRadius: '75%',
                             maxHeight: { xs: 350, md: 350 },
-                            maxWidth: { xs: 350, md: 250 },
+                            maxWidth: { xs: 350, md: 350 },
                         }}
                         alt={"User Avatar"}
                         src={user.avatar_url}
                         onClick={handleOpen}
                     />
                 </CardContent>
-                <TextField
-                    variant="outlined"
-                    label="Username"
-                    style={{
-                        width: "50%",
-                    }}
-                    disabled={true}
-                    value={user.username}
-                    onClick={handleOpen}
-                />
-                <TextField
-                    variant="outlined"
-                    label="Email"
-                    style={{
-                        width: "50%",
-                    }}
-                    disabled={true}
-                    value={user.email}
-                    onClick={handleOpen}
-                />
+                <Stack spacing={3}>
+                    <TextField
+                        variant="outlined"
+                        label="Username"
+                        style={{
+                            width: "100%",
+                        }}
+                        disabled={true}
+                        value={user.username}
+                        onClick={handleOpen}
+                    />
+                    <TextField
+                        variant="outlined"
+                        label="Email"
+                        style={{
+                            width: "100%",
+                        }}
+                        disabled={true}
+                        value={user.email}
+                        onClick={handleOpen}
+                    />
+                </Stack>
             </Card>
+            }
             <Modal
                 open={open}
                 onClose={handleClose}
