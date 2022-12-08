@@ -19,7 +19,7 @@ function ChatTile({ user, convo, renderConversation }) {
   })
 
   return (
-    <Card sx={{ width: 350, maxHeight: 350, margin: "20px" }} onClick={handleClick}>
+    <Card sx={{ minWidth: "250px", width: "100%", maxHeight: 350, margin: "20px" }} onClick={handleClick}>
       <CardHeader
         title={convo.title}
         subheader={convo.most_recent_message_timestamp}

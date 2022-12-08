@@ -8,10 +8,16 @@ function ChatSideBar({ user, convoData, renderConversation }) {
 
   if (convoData.length > 0) {
     return (
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ maxWidth: '50%' }}
+        style={{ margin: "auto" }}
+      >
         <List>
           {convoData.map((convo) => (
-            <ChatTile key={convo.id} user={user} convo={convo} renderConversation={renderConversation}>
+            <ChatTile
+              key={convo.id}
+              user={user}
+              convo={convo}
+              renderConversation={renderConversation}>
               {convo.title}
             </ChatTile>
           ))}
