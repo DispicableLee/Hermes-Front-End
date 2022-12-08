@@ -6,6 +6,7 @@ import Main from "./Main";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [notifications, setNotifications] = useState(0);
 
   const autoLogin = () => {
     fetch("/me").then((r) => {
@@ -24,8 +25,8 @@ function App() {
 
   return (
     <div>
-      <NavBar user={user} setUser={setUser} />
-      <Main user={user} setUser={setUser} autoLogin={autoLogin} />
+      <NavBar user={user} setUser={setUser} notifications={notifications} />
+      <Main user={user} setUser={setUser} autoLogin={autoLogin} setNotifications={setNotifications} />
     </div>
   );
 }

@@ -21,11 +21,10 @@ const style = {
   p: 4,
 };
 
-function Contacts({ user, autoLogin, getConversations }) {
+function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const [contactsList, setContactsList] = useState([]);
   const [friendAccepted, setFriendAccepted] = useState(false);
-  const [newFriendRequests, setNewFriendRequests] = useState(0);
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
@@ -53,7 +52,7 @@ function Contacts({ user, autoLogin, getConversations }) {
           })
           // console.log(mappedContacts);
           setContactsList(mappedContacts);
-          setNewFriendRequests(mappedContacts.reduce((a, c) => a + (!c.contact_status ? 1 : 0), 0));
+          setNotifications(mappedContacts.reduce((a, c) => a + (!c.contact_status ? 1 : 0), 0));
         }
       });
   }, [friendAccepted, user]);
