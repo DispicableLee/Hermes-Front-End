@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button"
 import Card from "@mui/material/Card";
@@ -10,8 +9,7 @@ function EditConvoModal({ handleClose, selectedChat, setSelectedChat }) {
     const [chatData, setChatData] = useState({
         title: selectedChat.title,
         convo_url: ""
-    });
-    const navigate = useNavigate();
+    })
 
     function handleChange(e) {
         setChatData({ ...chatData, [e.target.name]: e.target.value })

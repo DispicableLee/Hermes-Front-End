@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import ChatTile from './ChatTile'
 // import Card from '@mui/material/Card';
-import { List, ListItem } from '@mui/material';
+import { List } from '@mui/material';
 
 function ChatSideBar({ user, convoData, renderConversation }) {
 

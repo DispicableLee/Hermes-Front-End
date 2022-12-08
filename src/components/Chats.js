@@ -7,9 +7,9 @@ import ChatSideBar from "./ChatSideBar";
 function Chats({ user, convoData, getConversations }) {
 
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
-  const [counter, setCounter] = useState(0)
+  // const [counter, setCounter] = useState(0)
 
-  useEffect(() => getConversations(), [selectedChat, counter])
+  useEffect(() => getConversations(), [selectedChat, getConversations])
 
   // function timer() {
   //   const timerID = setInterval(() => {
