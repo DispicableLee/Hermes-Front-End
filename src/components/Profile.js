@@ -88,9 +88,9 @@ function Profile({ user, setUser, autoLogin }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
+
                     <EditProfileModal user={user} setUser={setUser} handleClose={handleClose} />
-                    {/* </Typography> */}
+
                 </Box>
             </Modal>
         </div>

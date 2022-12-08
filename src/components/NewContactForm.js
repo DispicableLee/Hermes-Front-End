@@ -64,7 +64,7 @@ function NewContactForm(props) {
           return (
             <ListItem key={c.username}>
               <ListItemAvatar>
-                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }} src={c.avatar_url}>
                   <PersonIcon />
                 </Avatar>
               </ListItemAvatar>

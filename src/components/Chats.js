@@ -3,7 +3,6 @@ import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 
 
-
 function Chats({ user, convoData, getConversations }) {
 
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
@@ -76,6 +75,7 @@ function Chats({ user, convoData, getConversations }) {
         float: "left"
       }}>
         <ChatSideBar convoData={convoData} user={user} renderConversation={renderConversation} />
+
       </aside>
       <ConvoFrame
         user={user}
