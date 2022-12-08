@@ -1,23 +1,12 @@
 import "../App.css";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Badge from '@mui/material/Badge';
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import * as React from "react";
+import { AppBar, Avatar, Box, Badge, Button, Divider, Drawer, IconButton, List, ListItemButton, Toolbar, Typography } from "@mui/material";
+import { styled, useTheme } from "@mui/material/styles";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from "@mui/icons-material/Menu";
-import * as React from "react";
-import { useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Avatar } from "@mui/material";
-import ListItemButton from "@mui/material/ListItemButton";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //============== main styling ===========================================
 const drawerWidth = 240;
@@ -70,7 +59,7 @@ function NavBar({ user, setUser, notifications }) {
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar
                     position="static"
-                    color="error"
+                    style={{ background: '#6967af' }}
                 >
                     <Toolbar>
                         <IconButton

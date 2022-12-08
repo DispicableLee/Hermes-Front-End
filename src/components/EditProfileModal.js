@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 import Button from "@mui/material/Button"
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -55,56 +55,53 @@ function EditProfileModal({ user, setUser, handleClose }) {
               maxWidth: "60%",
             }}
           >
-            <TextField
-              variant="outlined"
-              type="text"
-              label="Username"
-              autoComplete="off"
-              name="username"
-              value={userData.username}
-              onChange={(e) => handleChange(e)}
-            />
-            <br />
-            <TextField
-              variant="outlined"
-              type="text"
-              label="Email"
-              name="email"
-              autoComplete="off"
-              value={userData.email}
-              onChange={(e) => handleChange(e)}
-            />
-            <br />
-            <TextField
-              variant="outlined"
-              type="password"
-              name="password"
-              label="Password"
-              value={userData.password}
-              onChange={(e) => handleChange(e)}
-              autoComplete="current-password"
-            />
-            <br />
-            <TextField
-              variant="outlined"
-              type="password"
-              name="password_confirmation"
-              label="Confirm Password"
-              value={userData.passwordConfirm}
-              onChange={(e) => handleChange(e)}
-              autoComplete="current-password"
-            />
-            <br />
-            <TextField
-              variant="outlined"
-              type="text"
-              name="avatar_url"
-              label="Profile Image"
-              value={userData.avatar_url}
-              onChange={(e) => handleChange(e)}
-            />
-            <br />
-            <Button variant="contained" type="submit">Save Changes</Button>
+            <Stack spacing={1}>
+              <TextField
+                variant="outlined"
+                type="text"
+                label="Username"
+                autoComplete="off"
+                name="username"
+                value={userData.username}
+                onChange={(e) => handleChange(e)}
+              />
+              <TextField
+                variant="outlined"
+                type="text"
+                label="Email"
+                name="email"
+                autoComplete="off"
+                value={userData.email}
+                onChange={(e) => handleChange(e)}
+              />
+              <TextField
+                variant="outlined"
+                type="password"
+                name="password"
+                label="Password"
+                value={userData.password}
+                onChange={(e) => handleChange(e)}
+                autoComplete="current-password"
+              />
+              <TextField
+                variant="outlined"
+                type="password"
+                name="password_confirmation"
+                label="Confirm Password"
+                value={userData.passwordConfirm}
+                onChange={(e) => handleChange(e)}
+                autoComplete="current-password"
+              />
+              <TextField
+                variant="outlined"
+                type="text"
+                name="avatar_url"
+                label="Profile Image"
+                value={userData.avatar_url}
+                onChange={(e) => handleChange(e)}
+              />
+              <Button variant="contained" type="submit">Save Changes</Button>
+            </Stack>
           </form>
         </CardContent>
       </Card>

@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import Box from '@mui/material/Box';
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
+// import { useLocation } from 'react-router-dom';
+// MUI styling --------------------------------------------------------------
+import { Avatar, Box, Button, Card, CardContent, CardHeader, IconButton, Modal, TextField } from "@mui/material";
 import { red } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { TextField } from "@mui/material";
-import MsgSent from "./MsgSent";
-import MsgReceived from "./MsgReceived";
 import EmojiPicker from 'emoji-picker-react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+// child components ---------------------------------------------------------
+import MsgSent from "./MsgSent";
+import MsgReceived from "./MsgReceived";
 import EditConvoModal from "./EditConvoModal";
-import Modal from '@mui/material/Modal';
+// import useResponsive from './useResponsive';
 
 const style = {
   position: 'absolute',

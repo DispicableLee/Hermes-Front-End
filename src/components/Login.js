@@ -7,10 +7,6 @@ import loginImage from "../assets/mailguy.jpeg"
 import customShadows from "../theme/customShadows";
 import palette from '../theme/palette';
 import Iconify from './iconify';
-// import Button from "@mui/material/Button"
-// import Card from "@mui/material/Card";
-// import CardHeader from "@mui/material/CardHeader";
-// import CardContent from "@mui/material/CardContent";
 
 // ----------------------------------------------------------------------
 const color = palette.grey[500];
