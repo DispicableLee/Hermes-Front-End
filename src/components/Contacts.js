@@ -25,6 +25,7 @@ function Contacts({ user, autoLogin, getConversations }) {
 
   const [contactsList, setContactsList] = useState([]);
   const [friendAccepted, setFriendAccepted] = useState(false);
+  const [newFriendRequests, setNewFriendRequests] = useState(0);
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
@@ -42,7 +43,6 @@ function Contacts({ user, autoLogin, getConversations }) {
         // console.log(contacts)
         if (!!contacts && !!user) {
           const mappedContacts = contacts.map(obj => {
-            // console.log(user.username, obj.friend)
             if (obj.friend.username === user.username) {
               return { ...obj.user, contact_status: obj.contact_status }
             } else if (obj.user.username === user.username) {
@@ -51,8 +51,9 @@ function Contacts({ user, autoLogin, getConversations }) {
               return null
             }
           })
-          // console.log(mappedContacts)
-          setContactsList(mappedContacts)
+          // console.log(mappedContacts);
+          setContactsList(mappedContacts);
+          setNewFriendRequests(mappedContacts.reduce((a, c) => a + (!c.contact_status ? 1 : 0), 0));
         }
       });
   }, [friendAccepted, user]);
@@ -86,7 +87,7 @@ function Contacts({ user, autoLogin, getConversations }) {
     <div>
       <Card>
         <CardHeader title="My Contacts" />
-        <AddContacts contactsList={contactsList} />
+        <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
         <Button variant="contained" onClick={handleClickOpen}>New Group Chat</Button>
         {renderedContactsList}
       </Card>
