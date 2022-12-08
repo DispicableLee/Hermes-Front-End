@@ -19,13 +19,14 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
             })
         })
             .then(r => {
+                navigate("/chats")
                 if (r.ok) {
                     r.json().then(r => {
                         console.log(r)
                         // getConversations()
-                        navigate("/chats")
                     })
                 } else {
+
                     console.log(r)
                 }
             })
