@@ -40,6 +40,7 @@ function Contacts({ user, autoLogin, getConversations }) {
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
+        // console.log(contacts)
         if (!!contacts && !!user) {
           const mappedContacts = contacts.map(obj => {
             if (obj.friend.username === user.username) {
@@ -81,6 +82,7 @@ function Contacts({ user, autoLogin, getConversations }) {
     );
 
   });
+
   return (
     <div>
       <Card>
