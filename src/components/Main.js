@@ -8,7 +8,7 @@ import Contacts from './Contacts';
 import Profile from './Profile';
 import SignUp from "./SignUp";
 
-function Main({ user, setUser, autoLogin, setNotifications }) {
+function Main({ user, setUser, autoLogin, setNotifications, counter }) {
     const [convoData, setConvoData] = useState({});
 
     useEffect(() => getConversations(), [])
@@ -36,6 +36,7 @@ function Main({ user, setUser, autoLogin, setNotifications }) {
                     autoLogin={autoLogin}
                     convoData={convoData}
                     getConversations={getConversations}
+                    counter={counter}
                 />} />
                 <Route path="/login" element={<Login
                     user={user}
