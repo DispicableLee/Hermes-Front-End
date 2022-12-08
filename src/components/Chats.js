@@ -3,11 +3,22 @@ import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 
 
+
 function Chats({ user, convoData, getConversations }) {
 
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
+  const [counter, setCounter] = useState(0)
 
-  useEffect(() => getConversations(), [selectedChat])
+  useEffect(() => getConversations(), [selectedChat, counter])
+
+  // function timer() {
+  //   const timerID = setInterval(() => {
+  //     setCounter(counter => counter + 1)
+  //   }, 500);
+  //   console.log(counter)
+  //   return
+  // }
+  // // timer()
 
   function renderConversation(selectedConvoId) {
     const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))

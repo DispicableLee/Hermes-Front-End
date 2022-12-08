@@ -9,7 +9,7 @@ import AddContacts from "./AddContacts";
 import ContactTile from "./ContactTile";
 import { useState, useEffect } from "react";
 
-function Contacts({ user, autoLogin }) {
+function Contacts({ user, autoLogin, getConversations }) {
   const [contactsList, setContactsList] = useState([]);
   const [friendAccepted, setFriendAccepted] = useState(false);
   useEffect(() => {
@@ -18,18 +18,18 @@ function Contacts({ user, autoLogin }) {
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
-        console.log(contacts)
+        // console.log(contacts)
         if (!!contacts) {
           const mappedContacts = contacts.map(obj => {
 
-            console.log(user.username, obj.friend)
+            // console.log(user.username, obj.friend)
             if (obj.friend.username === user.username) {
               return { ...obj.user, contact_status: obj.contact_status }
             } else if (obj.user.username === user.username) {
               return { ...obj.friend, contact_status: obj.contact_status }
             }
           })
-          console.log(mappedContacts)
+          // console.log(mappedContacts)
           setContactsList(mappedContacts)
         }
       });
@@ -70,7 +70,7 @@ function Contacts({ user, autoLogin }) {
     return (
       <ContactTile key={friend.id} friend={friend}
         acceptFriendRequest={acceptFriendRequest}
-        user={user}
+        user={user} getConversations={getConversations}
       />
     );
 
