@@ -32,18 +32,35 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
             })
     }
 
-    let acceptedFriendBtn = friend.contact_status ?
-        <Button
-            variant="contained"
-            onClick={startChat}
-        >Start Chat
-        </Button> :
-        <Button
-            variant="contained"
-            onClick={() => acceptFriendRequest(friend.id)}
-        >
-            Accept Friend Request
-        </Button>;
+    let friendBtn;
+
+    if (friend.contact_status) {
+        friendBtn = (
+            <Button
+                variant="contained"
+                onClick={startChat}
+            >Start Chat
+            </Button>)
+    }
+    else {
+        // Do not show accept friend button when user === you
+        if (friend.direction === "request received") {
+            friendBtn = (
+                <Button disabled>
+                    Request Sent
+                </Button>
+            )
+        } else {
+            friendBtn = (
+                <Button
+                    variant="contained"
+                    onClick={() => acceptFriendRequest(friend.id)}
+                >
+                    Accept Friend Request
+                </Button>
+            )
+        }
+    }
 
     return (
         <Card sx={{ maxWidth: 300 }} key={friend.username}>
@@ -58,7 +75,7 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
                     {friend.username}
                 </Typography>
             </CardContent>
-            {acceptedFriendBtn}
+            {friendBtn}
             <br />
         </Card>
     )

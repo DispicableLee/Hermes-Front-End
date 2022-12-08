@@ -42,10 +42,12 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
         // console.log(contacts)
         if (!!contacts && !!user) {
           const mappedContacts = contacts.map(obj => {
+            // If friend obj is logged in user, return friend obj. 
             if (obj.friend.username === user.username) {
-              return { ...obj.user, contact_status: obj.contact_status }
+              return { ...obj.user, contact_status: obj.contact_status, direction: "request received" }
+              // If user obj is logged in user, return friend obj.
             } else if (obj.user.username === user.username) {
-              return { ...obj.friend, contact_status: obj.contact_status }
+              return { ...obj.friend, contact_status: obj.contact_status, direction: "request sent" }
             } else {
               return null
             }
