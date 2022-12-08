@@ -1,6 +1,7 @@
 import "../App.css";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Badge from '@mui/material/Badge';
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -31,7 +32,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     justifyContent: "flex-end",
 }));
 
-function NavBar({ user, setUser }) {
+function NavBar({ user, setUser, notifications }) {
     const navigate = useNavigate();
     //=========================== handle open/close====================================
     const theme = useTheme();
@@ -88,19 +89,21 @@ function NavBar({ user, setUser }) {
                         <div>
                             {user ? (
                                 <>
-                                    <Avatar
-                                        style={{
-                                            float: "right"
-                                        }}
-                                        src={user.avatar_url}
-                                        onClick={() => navigate("/profile")}
-
-                                    ></Avatar>
                                     <Typography color="inherit"
                                         style={{ float: "right" }}
                                         onClick={handleEditProfileClick}>
                                         Hi, {user.username}!
                                     </Typography>
+                                    <Badge badgeContent={notifications} color="primary" style={{ float: "right" }}>
+                                        <Avatar
+                                            style={{
+                                                float: "right"
+                                            }}
+                                            src={user.avatar_url}
+                                            onClick={() => navigate("/profile")}
+
+                                        ></Avatar>
+                                    </Badge>
                                 </>
                             ) : (
                                 <>
