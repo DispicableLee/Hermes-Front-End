@@ -3,26 +3,17 @@ import ConvoFrame from "./ConvoFrame";
 import ChatSideBar from "./ChatSideBar";
 import useResponsive from "./useResponsive";
 
-
-
-function Chats({ user, autoLogin, convoData, getConversations }) {
+function Chats({ user, autoLogin, convoData, getConversations, counter }) {
   const mdUp = useResponsive('up', 'md');
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
-  // const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     autoLogin()
     getConversations()
-  }, [selectedChat])
-
-  // function timer() {
-  //   const timerID = setInterval(() => {
-  //     setCounter(counter => counter + 1)
-  //   }, 500);
-  //   console.log(counter)
-  //   return
-  // }
-  // // timer()
+    if (selectedChat) {
+      renderConversation(selectedChat.id)
+    }
+  }, [selectedChat, counter])
 
   function renderConversation(selectedConvoId) {
     const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))

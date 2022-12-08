@@ -4,7 +4,6 @@ import { Box, Button, Card, CardHeader, Grid, Modal, Table, TableBody, TableCont
 import AddContacts from "./AddContacts";
 import ContactTile from "./ContactTile";
 import GroupChatModal from "./GroupChatModal";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const style = {
@@ -72,13 +71,13 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const renderedContactsList = contactsList.map((friend) => {
     return (
-        <ContactTile 
-          key={friend.id} 
-          friend={friend}
-          acceptFriendRequest={acceptFriendRequest}
-          user={user} 
-          getConversations={getConversations}
-        />
+      <ContactTile
+        key={friend.id}
+        friend={friend}
+        acceptFriendRequest={acceptFriendRequest}
+        user={user}
+        getConversations={getConversations}
+      />
     );
 
   });
@@ -86,23 +85,23 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
   return (
     <div>
       <Grid container rowSpacing={1} columnSpacing={2}>
-          {/* <TableContainer sx={{ minWidth: 800 }}> */}
-            {/* <Table> */}
-              {/* <TableBody> */}
-                {/* <CardHeader title="My Contacts" /> */}
-                {/* <Grid item xs={6}> */}
-                  <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
-                  {/* </Grid> */}
-                  <Button 
-                    variant="contained" 
-                    onClick={handleClickOpen}
-                    >
-                    New Group Chat
-                  </Button>
-                {renderedContactsList}
-              {/* </TableBody> */}
-            {/* </Table> */}
-          {/* </TableContainer> */}
+        {/* <TableContainer sx={{ minWidth: 800 }}> */}
+        {/* <Table> */}
+        {/* <TableBody> */}
+        {/* <CardHeader title="My Contacts" /> */}
+        {/* <Grid item xs={6}> */}
+        <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
+        {/* </Grid> */}
+        <Button
+          variant="contained"
+          onClick={handleClickOpen}
+        >
+          New Group Chat
+        </Button>
+        {renderedContactsList}
+        {/* </TableBody> */}
+        {/* </Table> */}
+        {/* </TableContainer> */}
       </Grid>
       <Modal
         open={open}

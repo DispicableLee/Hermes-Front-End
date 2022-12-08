@@ -32,15 +32,12 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
   const handleClose = () => setOpen(false);
   const ref = useRef(null);
 
-
   function handleSubmit(e) {
     e.preventDefault();
     sendNewMessage(newMessage);
     setNewMessage("")
     setShowEmojiPicker(false);
   }
-
-
 
   function handleChange(e) {
     setNewMessage(e.target.value);
