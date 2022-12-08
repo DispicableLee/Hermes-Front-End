@@ -1,11 +1,8 @@
 import * as React from "react";
-import Box from '@mui/material/Box';
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
+import { useState, useEffect } from "react";
+import { Box, Button, Card, CardHeader, Grid, Modal, Table, TableBody, TableContainer } from '@mui/material';
 import AddContacts from "./AddContacts";
 import ContactTile from "./ContactTile";
-import Modal from '@mui/material/Modal';
 import GroupChatModal from "./GroupChatModal";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -75,22 +72,38 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const renderedContactsList = contactsList.map((friend) => {
     return (
-      <ContactTile key={friend.id} friend={friend}
-        acceptFriendRequest={acceptFriendRequest}
-        user={user} getConversations={getConversations}
-      />
+        <ContactTile 
+          key={friend.id} 
+          friend={friend}
+          acceptFriendRequest={acceptFriendRequest}
+          user={user} 
+          getConversations={getConversations}
+        />
     );
 
   });
 
   return (
     <div>
-      <Card>
-        <CardHeader title="My Contacts" />
-        <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
-        <Button variant="contained" onClick={handleClickOpen}>New Group Chat</Button>
-        {renderedContactsList}
-      </Card>
+      <Grid container rowSpacing={1} columnSpacing={2}>
+          {/* <TableContainer sx={{ minWidth: 800 }}> */}
+            {/* <Table> */}
+              {/* <TableBody> */}
+                {/* <CardHeader title="My Contacts" /> */}
+                {/* <Grid item xs={6}> */}
+                  <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
+                  {/* </Grid> */}
+                  <Button 
+                    variant="contained" 
+                    onClick={handleClickOpen}
+                    >
+                    New Group Chat
+                  </Button>
+                {renderedContactsList}
+              {/* </TableBody> */}
+            {/* </Table> */}
+          {/* </TableContainer> */}
+      </Grid>
       <Modal
         open={open}
         onClose={handleClose}
