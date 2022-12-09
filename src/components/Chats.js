@@ -63,7 +63,8 @@ function Chats({ user, autoLogin, convoData, getConversations, counter }) {
   return (
     <div>
       <aside style={{
-        float: "left"
+        float: "left",
+        // backgroundColor: "red"
       }}>
         {mdUp &&
           <ChatSideBar convoData={convoData} user={user} renderConversation={renderConversation} />

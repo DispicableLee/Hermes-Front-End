@@ -82,13 +82,17 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
           style={{
             margin: "auto",
             transform: "translate(0%, 4%)",
+            backgroundColor: "white",
             boxShadow: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}`
           }}
         >
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={selectedChat.convo_url}>
-              </Avatar>
+              <Avatar 
+                sx={{ bgcolor: red[500] }} 
+                aria-label="recipe" 
+                src={selectedChat.convo_url}
+              />
             }
             action={
               <IconButton aria-label="settings" onClick={handleOpen}>
@@ -108,7 +112,7 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
           /> */}
           <CardContent style={{
             height: chatHeight, overflowY: "scroll", overflowX: "hidden",
-            backgroundColor: "lightblue"
+            backgroundColor: "#F9FAFB"
           }} id="ChatContainer">
             {selectedChat.messages.map((msg, i) => {
               let renderMessage;
