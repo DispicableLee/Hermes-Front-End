@@ -35,7 +35,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
-        // console.log(contacts)
+        // console.log(contacts, user)
         if (!!contacts && !!user) {
           const mappedContacts = contacts.map(obj => {
             // If friend obj is logged in user, return friend obj. 
@@ -55,7 +55,8 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
         }
       });
   }, [friendAccepted, user, requestSent]);
-
+  
+  useEffect(() => autoLogin(), [])
 
   function acceptFriendRequest(friendID) {
     fetch(`/contacts/${friendID}`, {
@@ -75,7 +76,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const renderedContactsList = contactsList.map((friend) => {
     return (
-      <Grid item xs={3} md={4}>
+      <Grid xs={2} style={{ margin: "10px" }}>
         <ContactTile
           key={friend.id}
           friend={friend}

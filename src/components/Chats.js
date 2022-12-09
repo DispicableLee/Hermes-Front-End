@@ -7,23 +7,12 @@ function Chats({ user, autoLogin, convoData, getConversations, counter }) {
   const mdUp = useResponsive('up', 'md');
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
 
-  useEffect(() => getConversations(), [user]);
-
-  useEffect(() => {
-    autoLogin()
-    // getConversations()
-    if (selectedChat) {
-      renderConversation(selectedChat.id)
-    }
-  }, [selectedChat, counter])
+  useEffect(() => autoLogin(), [selectedChat])
+  useEffect(() => getConversations(), [user])
 
   function renderConversation(selectedConvoId) {
     const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))
-    if (JSON.stringify(selectedChat) === JSON.stringify(selectedConvo)) {
-      return
-    } else {
-      setSelectedChat(selectedConvo)
-    }
+    setSelectedChat(selectedConvo)
   }
 
   function sendNewMessage(message) {
