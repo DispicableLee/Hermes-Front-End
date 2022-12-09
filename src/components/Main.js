@@ -11,7 +11,7 @@ import SignUp from "./SignUp";
 function Main({ user, setUser, autoLogin, setNotifications, counter }) {
     const [convoData, setConvoData] = useState({});
 
-    useEffect(() => getConversations(), [])
+    useEffect(() => getConversations(), [user])
 
     function getConversations() {
         if (user) {

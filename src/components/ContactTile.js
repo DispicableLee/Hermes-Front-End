@@ -23,7 +23,7 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
                 if (r.ok) {
                     r.json().then(r => {
                         console.log(r)
-                        // getConversations()
+                        getConversations()
                     })
                 } else {
 

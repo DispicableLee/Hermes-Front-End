@@ -69,7 +69,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
       .then(r => r.json())
       .then(friendAccepted => {
         setFriendAccepted(param => !param)
-        navigate("/chats")
+        // navigate("/chats")
       })
       .catch(err => console.error(err))
   }
