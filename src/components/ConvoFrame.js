@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 // import { useLocation } from 'react-router-dom';
 // MUI styling --------------------------------------------------------------
-import { Avatar, Box, Button, Card, CardContent, CardHeader, IconButton, Modal, TextField } from "@mui/material";
+import { Avatar, Box, Button, Card, CardContent, CardHeader, Grid, IconButton, Modal, TextField } from "@mui/material";
 import { red } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EmojiPicker from 'emoji-picker-react';
@@ -155,27 +155,59 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
               return <div key={`div: ${msg.id}`}>{renderMessage}</div>;
             })}
           </CardContent>
-          <form onSubmit={handleSubmit} >
+          <form onSubmit={handleSubmit}>
             {emojiPicker}
-            <TextField
-              variant="outlined"
-              label="New Message"
-              style={{
-                width: "70%",
-              }}
-              value={newMessage}
-              onChange={handleChange}
-            />
-            <InsertEmoticonIcon onClick={() => setShowEmojiPicker(true)} />
-
-            <Button
-              variant="contained"
-              color="success"
-              type="submit"
-              style={{ width: "16%", margin: "2%" }}
-            >
-              Send
-            </Button>
+            <Grid container spacing={0}>
+              <Grid item xs={6} md={9}>
+                <TextField
+                  variant="outlined"
+                  label="New Message"
+                  style={{
+                    width: "95%",
+                    margin: "2%",
+                    padding: 0
+                  }}
+                  value={newMessage}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid 
+                item xs={3} 
+                md={0.75}
+                style ={{ 
+                  margin: 'auto',
+                  justifyContent: 'center',
+                  display: 'inline-block',
+                }}
+                >
+                
+              {/* </Grid>
+              <Grid item xs={4}> */}
+                <InsertEmoticonIcon 
+                  onClick={() => setShowEmojiPicker(true)} 
+                  />
+              </Grid>
+              <Grid 
+                item xs={3} 
+                md={2.25}
+                style ={{ 
+                  margin: 'auto',
+                  justifyContent: 'center',
+                  display: 'inline-block',
+                }}
+                >
+                <Button
+                  variant="contained"
+                  color="success"
+                  type="submit"
+                  style={{ 
+                    width: "90%"
+                  }}
+                >
+                  Send
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </Card>
         <Modal
