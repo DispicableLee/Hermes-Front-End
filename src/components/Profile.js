@@ -44,59 +44,57 @@ function Profile({ user, setUser, autoLogin }) {
     }
 
     return (
-        <div style={{margin: '0 35%'}}>
-            {mdUp && 
-            <Card
-                style={{
-                    boxShadow: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}`,
-                    // width: '50%',
-                    margin: 'auto',
-                    marginTop: '5%',
-                    padding: '5%',
-                    justifyContent: 'center',
-                    display: 'inline-block',
-                    // flexDirection: 'column'
-                }}
-            >
-                <CardHeader title="My Profile" style={{ textAlign: 'center' }}/>
-                <CardContent>
-                    <CardMedia
-                        component="img"
-                        sx={{
-                            width: '1500px',
-                            height: '1500px',
-                            borderRadius: '75%',
-                            maxHeight: { xs: 350, md: 350 },
-                            maxWidth: { xs: 350, md: 350 },
-                        }}
-                        alt={"User Avatar"}
-                        src={user.avatar_url}
-                        onClick={handleOpen}
-                    />
-                </CardContent>
-                <Stack spacing={3}>
-                    <TextField
-                        variant="outlined"
-                        label="Username"
-                        style={{
-                            width: "100%",
-                        }}
-                        disabled={true}
-                        value={user.username}
-                        onClick={handleOpen}
-                    />
-                    <TextField
-                        variant="outlined"
-                        label="Email"
-                        style={{
-                            width: "100%",
-                        }}
-                        disabled={true}
-                        value={user.email}
-                        onClick={handleOpen}
-                    />
-                </Stack>
-            </Card>
+        <div style={{ margin: '0 35%' }}>
+            {mdUp &&
+                <Card
+                    style={{
+                        boxShadow: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}`,
+                        margin: 'auto',
+                        marginTop: '5%',
+                        padding: '5%',
+                        justifyContent: 'center',
+                        display: 'inline-block',
+                    }}
+                >
+                    <CardHeader title="My Profile" style={{ textAlign: 'center' }} />
+                    <CardContent>
+                        <CardMedia
+                            component="img"
+                            sx={{
+                                width: '1500px',
+                                height: '1500px',
+                                borderRadius: '75%',
+                                maxHeight: { xs: 350, md: 350 },
+                                maxWidth: { xs: 350, md: 350 },
+                            }}
+                            alt={"User Avatar"}
+                            src={user.avatar_url}
+                            onClick={handleOpen}
+                        />
+                    </CardContent>
+                    <Stack spacing={3}>
+                        <TextField
+                            variant="outlined"
+                            label="Username"
+                            style={{
+                                width: "100%",
+                            }}
+                            disabled={true}
+                            value={user.username}
+                            onClick={handleOpen}
+                        />
+                        <TextField
+                            variant="outlined"
+                            label="Email"
+                            style={{
+                                width: "100%",
+                            }}
+                            disabled={true}
+                            value={user.email}
+                            onClick={handleOpen}
+                        />
+                    </Stack>
+                </Card>
             }
             <Modal
                 open={open}
