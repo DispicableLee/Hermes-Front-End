@@ -69,13 +69,18 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
             style={{
                 justifyContent: 'center',
                 padding: '10%',
-                marginLeft: '10%'
-
+                marginLeft: '10%',
+                margin: 'auto',
+                display: 'inline-block'
             }}
-
             sx={{ maxWidth: 300 }}
             key={friend.username}
         >
+            <CardContent style={{ textAlign: 'center' }}>
+                <Typography variant="body2" color="text.secondary">
+                    {friend.username}
+                </Typography>
+            </CardContent>
             <CardMedia
                 component="img"
                 height="200px"
@@ -83,16 +88,10 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
                     height: '200px',
                     width: '200px',
                     borderRadius: '50%',
-
                 }}
                 image={friend.avatar_url}
                 alt={friend.username}
             />
-            <CardContent style={{ textAlign: 'center' }}>
-                <Typography variant="body2" color="text.secondary">
-                    {friend.username}
-                </Typography>
-            </CardContent>
             {friendBtn}
             <br />
         </Card>

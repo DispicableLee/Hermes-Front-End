@@ -36,7 +36,10 @@ export default function MsgSent({ msg, deleteMessage, postUpdatedMessage }) {
         <Card 
             sx={{ 
                 minWidth: 275, 
-                marginRight: '10px', 
+                marginRight: '10px',
+                backgroundColor: "#6967af",
+                opacity: 0.85,
+                color: "white",
                 boxShadow: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}` 
             }}
         >
