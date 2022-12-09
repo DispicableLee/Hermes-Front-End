@@ -16,12 +16,12 @@ import { useState } from 'react';
 function NewContactForm(props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [contacts, setContacts] = useState([])
-  const { onClose, selectedValue, open, contactsList, setContactsList } = props;
+  const { onClose, selectedValue, open, contactsList, setContactsList, requestSent, setRequestSent } = props;
 
   const handleClose = () => onClose(selectedValue);
 
   const sendFriendRequest = (c) => {
-    console.log(c)
+    // console.log(c)
     fetch(`/contacts`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -31,8 +31,10 @@ function NewContactForm(props) {
       })
     }).then(r => r.json())
       .then(newContact => {
+        console.log(newContact)
         handleClose()
-        setContactsList([...contactsList, newContact])
+        // setContactsList([...contactsList, newContact])
+        setRequestSent(!requestSent)
       })
     // if friend accepts friend request, then render to contacts list
   }

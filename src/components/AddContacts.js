@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import NewContactForm from './NewContactForm';
 
-export default function AddContacts({ contactsList, setContactsList }) {
+export default function AddContacts({ contactsList, setContactsList, requestSent, setRequestSent }) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState("");
 
@@ -29,6 +29,8 @@ export default function AddContacts({ contactsList, setContactsList }) {
         onClose={handleClose}
         contactsList={contactsList}
         setContactsList={setContactsList}
+        requestSent={requestSent}
+        setRequestSent={setRequestSent}
       />
     </div>
   );
