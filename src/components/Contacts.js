@@ -88,38 +88,22 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
     );
   });
 
-  function NewGroupChat() {
-    return (
-      <Button
-            variant="contained"
-            onClick={handleClickOpen}
-            >
-            New Group Chat
-      </Button>
-    )
-  }
 
   return (
     <div>
-      <Grid
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={1}
+      <AddContacts 
+        contactsList={contactsList} 
+        setContactsList={setContactsList} 
+        requestSent={requestSent} 
+        setRequestSent={setRequestSent}
+        />
+      <Button
+        variant="contained"
+        onClick={handleClickOpen}
       >
-        <Grid item xs={2}>
-          <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
-        </Grid>
-        <Grid item xs={2}>
-          <NewGroupChat/>
-        </Grid>
-        <Button
-          variant="contained"
-          onClick={handleClickOpen}
-        >
-          New Group Chat
-        </Button>
+        New Group Chat
+      </Button>
+      <Grid container rowSpacing={0} columnSpacing={2}>
         {renderedContactsList}
       </Grid>
       <Modal
