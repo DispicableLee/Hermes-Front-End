@@ -6,6 +6,8 @@ import { red } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EmojiPicker from 'emoji-picker-react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import palette from '../theme/palette';
+import { alpha } from '@mui/material/styles';
 // child components ---------------------------------------------------------
 import MsgSent from "./MsgSent";
 import MsgReceived from "./MsgReceived";
@@ -23,6 +25,8 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+const color = palette.grey[500];
 
 function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, deleteMessage, postUpdatedMessage }) {
   const [newMessage, setNewMessage] = useState("");
@@ -77,7 +81,8 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
           sx={{ maxWidth: "50%" }}
           style={{
             margin: "auto",
-            transform: "translate(0%, 4%"
+            transform: "translate(0%, 4%)",
+            boxShadow: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}`
           }}
         >
           <CardHeader
@@ -115,10 +120,13 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
                       minWidth: "51%",
                       float: "right",
                       position: 'static',
-                      display: "block"
+                      display: "block",
                     }}
                   >
-                    <MsgSent key={`sent: ${msg.id}`} msg={msg} deleteMessage={deleteMessage}
+                    <MsgSent 
+                      key={`sent: ${msg.id}`} 
+                      msg={msg} 
+                      deleteMessage={deleteMessage}
                       postUpdatedMessage={postUpdatedMessage}
                     />
                   </aside>

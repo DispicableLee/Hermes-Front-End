@@ -25,7 +25,7 @@ function App() {
   // useEffect(() => {
   //   const timerID = setInterval(() => {
   //     setCounter(counter => counter + 1)
-  //   }, 1000);
+  //   }, 500);
   //   return () => clearInterval(timerID)
   // }, [])
 

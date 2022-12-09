@@ -29,7 +29,8 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
   const handleClose = (value) => {
     setOpen(false);
   };
-
+  useEffect(() => autoLogin(), [])
+  
   useEffect(() => {
     fetch("/mycontacts")
       .then((r) => r.json())
@@ -54,7 +55,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
         }
       });
   }, [friendAccepted, user, requestSent]);
-
+  
   useEffect(() => autoLogin(), [])
 
   function acceptFriendRequest(friendID) {
@@ -85,29 +86,41 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
         />
       </Grid>
     );
-
   });
+
+  function NewGroupChat() {
+    return (
+      <Button
+            variant="contained"
+            onClick={handleClickOpen}
+            >
+            New Group Chat
+      </Button>
+    )
+  }
 
   return (
     <div>
-      <AddContacts contactsList={contactsList} setContactsList={setContactsList} requestSent={requestSent} setRequestSent={setRequestSent} />
-      {/* </Grid> */}
-      <Button
-        variant="contained"
-        onClick={handleClickOpen}
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}
       >
-        New Group Chat
-      </Button>
-      <Grid container rowSpacing={0} columnSpacing={2}>
-        {/* <TableContainer sx={{ minWidth: 800 }}> */}
-        {/* <Table> */}
-        {/* <TableBody> */}
-        {/* <CardHeader title="My Contacts" /> */}
-        {/* <Grid item xs={6}> */}
+        <Grid item xs={2}>
+          <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
+        </Grid>
+        <Grid item xs={2}>
+          <NewGroupChat/>
+        </Grid>
+        <Button
+          variant="contained"
+          onClick={handleClickOpen}
+        >
+          New Group Chat
+        </Button>
         {renderedContactsList}
-        {/* </TableBody> */}
-        {/* </Table> */}
-        {/* </TableContainer> */}
       </Grid>
       <Modal
         open={open}
