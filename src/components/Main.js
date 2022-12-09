@@ -19,7 +19,7 @@ function Main({ user, setUser, autoLogin, setNotifications, counter }) {
                 .then(res => res.json())
                 .then(data => {
                     setConvoData(data)
-                    console.log("MyConvos:", data)
+                    //console.log("MyConvos:", data)
                 })
                 .catch(e => console.error(e))
         } else {
