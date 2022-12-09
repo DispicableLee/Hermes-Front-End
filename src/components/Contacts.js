@@ -22,6 +22,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const [contactsList, setContactsList] = useState([]);
   const [friendAccepted, setFriendAccepted] = useState(false);
+  const [requestSent, setRequestSent] = useState(false);
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
@@ -43,16 +44,17 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
               // If user obj is logged in user, return friend obj.
             } else if (obj.user.username === user.username) {
               return { ...obj.friend, contact_status: obj.contact_status, direction: "request sent" }
-            } else {
-              return null
             }
+            // else {
+            //   return null
+            // }
           })
-          // console.log(mappedContacts);
+          console.log(mappedContacts);
           setContactsList(mappedContacts);
           setNotifications(mappedContacts.reduce((a, c) => a + (!c.contact_status ? 1 : 0), 0));
         }
       });
-  }, [friendAccepted, user]);
+  }, [friendAccepted, user, requestSent]);
 
 
   function acceptFriendRequest(friendID) {
@@ -111,6 +113,12 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
         <Grid item xs={2}>
           <NewGroupChat/>
         </Grid>
+        <Button
+          variant="contained"
+          onClick={handleClickOpen}
+        >
+          New Group Chat
+        </Button>
         {renderedContactsList}
       </Grid>
       <Modal

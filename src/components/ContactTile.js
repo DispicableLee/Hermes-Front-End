@@ -44,13 +44,13 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
     }
     else {
         // Do not show accept friend button when user === you
-        if (friend.direction === "request received") {
+        if (friend.direction === "request sent") {
             friendBtn = (
                 <Button disabled>
                     Request Sent
                 </Button>
             )
-        } else {
+        } else if (friend.direction === "request received") {
             friendBtn = (
                 <Button
                     variant="contained"
@@ -59,6 +59,8 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
                     Accept Friend Request
                 </Button>
             )
+        } else {
+            return null
         }
     }
 

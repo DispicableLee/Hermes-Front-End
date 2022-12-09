@@ -19,7 +19,11 @@ function Chats({ user, autoLogin, convoData, getConversations, counter }) {
 
   function renderConversation(selectedConvoId) {
     const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))
-    setSelectedChat(selectedConvo)
+    if (JSON.stringify(selectedChat) === JSON.stringify(selectedConvo)) {
+      return
+    } else {
+      setSelectedChat(selectedConvo)
+    }
   }
 
   function sendNewMessage(message) {
