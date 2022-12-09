@@ -118,6 +118,7 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
               let renderMessage;
               if (msg.sender === user.username) {
                 renderMessage = (
+
                   <aside
                     style={{
                       margin: "0 0 10px 10px",
@@ -134,6 +135,7 @@ function ConvoFrame({ user, selectedChat, setSelectedChat, sendNewMessage, delet
                       postUpdatedMessage={postUpdatedMessage}
                     />
                   </aside>
+
                 );
               } else {
                 renderMessage = (
