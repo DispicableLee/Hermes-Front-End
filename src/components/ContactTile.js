@@ -39,6 +39,11 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
             <Button
                 variant="contained"
                 onClick={startChat}
+                style={{
+                    justifyContent: 'center',
+                    margin: "10% 15% 0 15%",
+                    display: "inline-block"
+                }}
             >Start Chat
             </Button>)
     }
@@ -46,7 +51,12 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
         // Do not show accept friend button when user === you
         if (friend.direction === "request sent") {
             friendBtn = (
-                <Button disabled>
+                <Button disabled
+                    style={{
+                        justifyContent: 'center',
+                        margin: "10% 15% 0 15%",
+                        display: "inline-block"
+                    }}>
                     Request Sent
                 </Button>
             )
@@ -54,9 +64,14 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
             friendBtn = (
                 <Button
                     variant="contained"
+                    style={{
+                        justifyContent: 'center',
+                        margin: "10% 7.5% 0 7.5%",
+                        display: "inline-block"
+                    }}
                     onClick={() => acceptFriendRequest(friend.id)}
                 >
-                    Accept Friend Request
+                    Accept Request
                 </Button>
             )
         } else {
@@ -69,13 +84,22 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
             style={{
                 justifyContent: 'center',
                 padding: '10%',
-                marginLeft: '10%'
-
+                margin: 'auto',
+                display: 'inline-block'
             }}
-
             sx={{ maxWidth: 300 }}
             key={friend.username}
         >
+            <CardContent
+                style={{ textAlign: 'center' }}
+            >
+                <Typography
+                    variant="h5"
+                    color="text.secondary"
+                >
+                    {friend.username}
+                </Typography>
+            </CardContent>
             <CardMedia
                 component="img"
                 height="200px"
@@ -83,16 +107,10 @@ function ContactTile({ user, friend, acceptFriendRequest, getConversations }) {
                     height: '200px',
                     width: '200px',
                     borderRadius: '50%',
-
                 }}
                 image={friend.avatar_url}
                 alt={friend.username}
             />
-            <CardContent style={{ textAlign: 'center' }}>
-                <Typography variant="body2" color="text.secondary">
-                    {friend.username}
-                </Typography>
-            </CardContent>
             {friendBtn}
             <br />
         </Card>

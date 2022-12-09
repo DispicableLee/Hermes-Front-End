@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Box, Button, Card, CardHeader, Grid, Modal, Table, TableBody, TableContainer } from '@mui/material';
+import { Box, Button, Card, CardMedia, Grid, Modal, Table, TableBody, TableContainer } from '@mui/material';
 import AddContacts from "./AddContacts";
 import ContactTile from "./ContactTile";
 import GroupChatModal from "./GroupChatModal";
@@ -85,29 +85,37 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
         />
       </Grid>
     );
-
   });
 
   return (
     <div>
-      <AddContacts contactsList={contactsList} setContactsList={setContactsList} requestSent={requestSent} setRequestSent={setRequestSent} />
-      {/* </Grid> */}
-      <Button
-        variant="contained"
-        onClick={handleClickOpen}
-      >
-        New Group Chat
-      </Button>
       <Grid container rowSpacing={0} columnSpacing={2}>
-        {/* <TableContainer sx={{ minWidth: 800 }}> */}
-        {/* <Table> */}
-        {/* <TableBody> */}
-        {/* <CardHeader title="My Contacts" /> */}
-        {/* <Grid item xs={6}> */}
+        <Grid xs={3}>
+          <AddContacts contactsList={contactsList} setContactsList={setContactsList} requestSent={requestSent} setRequestSent={setRequestSent} />
+        </Grid>
+        <Card >
+          <Button
+            variant="contained"
+            onClick={handleClickOpen}
+          >
+            New Group Chat
+          </Button>
+          <CardMedia
+            component="img"
+            height="200px"
+            sx={{
+              height: '200px',
+              width: '200px',
+              borderRadius: '50%',
+            }}
+            image="https://cdn-icons-png.flaticon.com/512/3215/3215206.png"
+            alt="new group chat"
+          />
+        </Card>
+
+      </Grid >
+      <Grid container rowSpacing={0} columnSpacing={2}>
         {renderedContactsList}
-        {/* </TableBody> */}
-        {/* </Table> */}
-        {/* </TableContainer> */}
       </Grid>
       <Modal
         open={open}
@@ -119,7 +127,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
           <GroupChatModal user={user} contactsList={contactsList} handleClose={handleClose} />
         </Box>
       </Modal>
-    </div>
+    </div >
   );
 }
 
