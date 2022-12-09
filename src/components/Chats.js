@@ -9,11 +9,13 @@ function Chats({ user, autoLogin, convoData, getConversations, counter }) {
 
   useEffect(() => {
     autoLogin()
-    getConversations()
+    // getConversations()
     if (selectedChat) {
       renderConversation(selectedChat.id)
     }
-  }, [selectedChat, counter])
+  }, [selectedChat])
+
+  useEffect(() => getConversations(), [user])
 
   function renderConversation(selectedConvoId) {
     const selectedConvo = convoData.find(convo => (convo.id === selectedConvoId))
