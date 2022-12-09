@@ -34,7 +34,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
     fetch("/mycontacts")
       .then((r) => r.json())
       .then(contacts => {
-        // console.log(contacts)
+        // console.log(contacts, user)
         if (!!contacts && !!user) {
           const mappedContacts = contacts.map(obj => {
             // If friend obj is logged in user, return friend obj. 
@@ -55,6 +55,8 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
       });
   }, [friendAccepted, user, requestSent]);
 
+  useEffect(() => autoLogin(), [])
+
   function acceptFriendRequest(friendID) {
     fetch(`/contacts/${friendID}`, {
       method: "PATCH",
@@ -73,33 +75,35 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const renderedContactsList = contactsList.map((friend) => {
     return (
-      <ContactTile
-        key={friend.id}
-        friend={friend}
-        acceptFriendRequest={acceptFriendRequest}
-        user={user}
-        getConversations={getConversations}
-      />
+      <Grid xs={2} style={{ margin: "10px" }}>
+        <ContactTile
+          key={friend.id}
+          friend={friend}
+          acceptFriendRequest={acceptFriendRequest}
+          user={user}
+          getConversations={getConversations}
+        />
+      </Grid>
     );
 
   });
 
   return (
     <div>
-      <Grid container rowSpacing={1} columnSpacing={2}>
+      <AddContacts contactsList={contactsList} setContactsList={setContactsList} requestSent={requestSent} setRequestSent={setRequestSent} />
+      {/* </Grid> */}
+      <Button
+        variant="contained"
+        onClick={handleClickOpen}
+      >
+        New Group Chat
+      </Button>
+      <Grid container rowSpacing={0} columnSpacing={2}>
         {/* <TableContainer sx={{ minWidth: 800 }}> */}
         {/* <Table> */}
         {/* <TableBody> */}
         {/* <CardHeader title="My Contacts" /> */}
         {/* <Grid item xs={6}> */}
-        <AddContacts contactsList={contactsList} setContactsList={setContactsList} requestSent={requestSent} setRequestSent={setRequestSent} />
-        {/* </Grid> */}
-        <Button
-          variant="contained"
-          onClick={handleClickOpen}
-        >
-          New Group Chat
-        </Button>
         {renderedContactsList}
         {/* </TableBody> */}
         {/* </Table> */}
