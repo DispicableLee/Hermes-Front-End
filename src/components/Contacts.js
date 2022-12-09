@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Box, Button, Card, CardMedia, Grid, Modal, Table, TableBody, TableContainer } from '@mui/material';
+import { Box, Button, Card, CardMedia, Grid, Modal } from '@mui/material';
 import AddContacts from "./AddContacts";
 import ContactTile from "./ContactTile";
 import GroupChatModal from "./GroupChatModal";
@@ -30,7 +30,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
     setOpen(false);
   };
   useEffect(() => autoLogin(), [])
-  
+
   useEffect(() => {
     fetch("/mycontacts")
       .then((r) => r.json())
@@ -49,13 +49,13 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
             //   return null
             // }
           })
-          console.log(mappedContacts);
+          // console.log(mappedContacts);
           setContactsList(mappedContacts);
           setNotifications(mappedContacts.reduce((a, c) => a + (!c.contact_status ? 1 : 0), 0));
         }
       });
   }, [friendAccepted, user, requestSent]);
-  
+
   useEffect(() => autoLogin(), [])
 
   function acceptFriendRequest(friendID) {
@@ -76,7 +76,8 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const renderedContactsList = contactsList.map((friend) => {
     return (
-      <Grid xs={2} style={{ margin: "10px" }}>
+      <Grid xs={2} style={{ margin: "10px" }} key={friend.id}>
+
         <ContactTile
           key={friend.id}
           friend={friend}
@@ -84,6 +85,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
           user={user}
           getConversations={getConversations}
         />
+
       </Grid>
     );
   });
@@ -91,29 +93,54 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   return (
     <div>
-      <Grid container rowSpacing={0} columnSpacing={2}>
+      <Grid
+        // spacing={0}
+        rowSpacing={0}
+        columnSpacing={2}
+
+      >
         <Grid xs={3}>
-          <AddContacts contactsList={contactsList} setContactsList={setContactsList} requestSent={requestSent} setRequestSent={setRequestSent} />
-        </Grid>
-        <Card >
-          <Button
-            variant="contained"
-            onClick={handleClickOpen}
-          >
-            New Group Chat
-          </Button>
-          <CardMedia
-            component="img"
-            height="200px"
-            sx={{
-              height: '200px',
-              width: '200px',
-              borderRadius: '50%',
+          <Card
+            style={{
+              padding: '1%',
+              margin: "1%",
+              justifyContent: 'center',
+              display: 'inline-block',
+            }}>
+
+            <AddContacts
+              contactsList={contactsList} setContactsList={setContactsList} requestSent={requestSent} setRequestSent={setRequestSent} />
+
+          </Card>
+          <Card
+            style={{
+              margin: "1%",
+              padding: '1%',
+              justifyContent: 'center',
+              display: 'inline-block',
+
             }}
-            image="https://cdn-icons-png.flaticon.com/512/3215/3215206.png"
-            alt="new group chat"
-          />
-        </Card>
+          >
+            <Button
+              variant="outlined"
+              onClick={handleClickOpen}
+              style={{ margin: "0 7%" }}
+            >
+              New Group Chat
+            </Button>
+            <CardMedia
+              component="img"
+              height="200px"
+              sx={{
+                height: '200px',
+                width: '200px',
+                borderRadius: '50%',
+              }}
+              image="https://cdn-icons-png.flaticon.com/512/3215/3215206.png"
+              alt="new group chat"
+            />
+          </Card>
+        </Grid>
       </Grid >
       <Grid container rowSpacing={0} columnSpacing={2}>
         {renderedContactsList}
