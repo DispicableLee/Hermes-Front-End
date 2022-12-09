@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { TextField } from "@mui/material";
-import Button from "@mui/material/Button"
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import { Button, Card, CardContent, TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import palette from '../theme/palette';
+import { alpha } from '@mui/material/styles';
+
+const color = palette.grey[500];
 
 export default function MsgSent({ msg, deleteMessage, postUpdatedMessage }) {
     const [showEditIcon, setShowEditIcon] = useState(false);
@@ -32,7 +33,13 @@ export default function MsgSent({ msg, deleteMessage, postUpdatedMessage }) {
 
     return (
 
-        <Card sx={{ minWidth: 275, marginRight: '10px' }}>
+        <Card 
+            sx={{ 
+                minWidth: 275, 
+                marginRight: '10px', 
+                boxShadow: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}` 
+            }}
+        >
             <CardContent
                 onMouseEnter={() => setShowEditIcon(true)}
                 onMouseLeave={() => setShowEditIcon(false)}

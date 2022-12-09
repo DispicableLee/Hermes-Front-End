@@ -28,7 +28,8 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
   const handleClose = (value) => {
     setOpen(false);
   };
-
+  useEffect(() => autoLogin(), [])
+  
   useEffect(() => {
     fetch("/mycontacts")
       .then((r) => r.json())
@@ -53,6 +54,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
       });
   }, [friendAccepted, user]);
 
+
   function acceptFriendRequest(friendID) {
     fetch(`/contacts/${friendID}`, {
       method: "PATCH",
@@ -71,37 +73,45 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const renderedContactsList = contactsList.map((friend) => {
     return (
-      <ContactTile
-        key={friend.id}
-        friend={friend}
-        acceptFriendRequest={acceptFriendRequest}
-        user={user}
-        getConversations={getConversations}
-      />
+      <Grid item xs={3} md={4}>
+        <ContactTile
+          key={friend.id}
+          friend={friend}
+          acceptFriendRequest={acceptFriendRequest}
+          user={user}
+          getConversations={getConversations}
+        />
+      </Grid>
     );
-
   });
+
+  function NewGroupChat() {
+    return (
+      <Button
+            variant="contained"
+            onClick={handleClickOpen}
+            >
+            New Group Chat
+      </Button>
+    )
+  }
 
   return (
     <div>
-      <Grid container rowSpacing={1} columnSpacing={2}>
-        {/* <TableContainer sx={{ minWidth: 800 }}> */}
-        {/* <Table> */}
-        {/* <TableBody> */}
-        {/* <CardHeader title="My Contacts" /> */}
-        {/* <Grid item xs={6}> */}
-        <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
-        {/* </Grid> */}
-        <Button
-          variant="contained"
-          onClick={handleClickOpen}
-        >
-          New Group Chat
-        </Button>
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item xs={2}>
+          <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
+        </Grid>
+        <Grid item xs={2}>
+          <NewGroupChat/>
+        </Grid>
         {renderedContactsList}
-        {/* </TableBody> */}
-        {/* </Table> */}
-        {/* </TableContainer> */}
       </Grid>
       <Modal
         open={open}

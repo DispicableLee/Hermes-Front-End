@@ -7,9 +7,11 @@ function Chats({ user, autoLogin, convoData, getConversations, counter }) {
   const mdUp = useResponsive('up', 'md');
   const [selectedChat, setSelectedChat] = useState(convoData[0]);
 
+  useEffect(() => getConversations(), [user]);
+
   useEffect(() => {
     autoLogin()
-    getConversations()
+    // getConversations()
     if (selectedChat) {
       renderConversation(selectedChat.id)
     }

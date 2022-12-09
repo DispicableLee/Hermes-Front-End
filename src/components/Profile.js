@@ -3,7 +3,7 @@ import { Box, Card, CardContent, CardHeader, CardMedia, Modal, Stack, TextField 
 import EditProfileModal from './EditProfileModal';
 import useResponsive from './useResponsive';
 import palette from '../theme/palette';
-import { styled, alpha } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 
 const style = {
     position: 'absolute',
@@ -57,7 +57,6 @@ function Profile({ user, setUser, autoLogin }) {
                     display: 'inline-block',
                     // flexDirection: 'column'
                 }}
-            
             >
                 <CardHeader title="My Profile" style={{ textAlign: 'center' }}/>
                 <CardContent>

@@ -1,10 +1,9 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import Avatar from '@mui/material/Avatar';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Typography from '@mui/material/Typography';
+import { Card, CardHeader, CardContent, Avatar, AvatarGroup, Typography } from '@mui/material';
+import { alpha } from '@mui/material/styles';
+import palette from '../theme/palette';
+
+const color = palette.grey[500];
 
 function ChatTile({ user, convo, renderConversation }) {
 
@@ -20,6 +19,7 @@ function ChatTile({ user, convo, renderConversation }) {
 
   return (
     <Card
+      style={{boxShadow: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}`}}
       sx={{ minWidth: "250px", width: "100%", maxHeight: 350, margin: "20px" }}
       onClick={handleClick}>
       <CardHeader
@@ -34,8 +34,6 @@ function ChatTile({ user, convo, renderConversation }) {
       <AvatarGroup max={3} style={{ float: "left" }}>
         {avatars}
       </AvatarGroup>
-      {/* <CardActions disableSpacing> */}
-      {/* </CardActions> */}
     </Card >
   );
 }
