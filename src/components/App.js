@@ -22,12 +22,12 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    const timerID = setInterval(() => {
-      setCounter(counter => counter + 1)
-    }, 500);
-    return () => clearInterval(timerID)
-  }, [])
+  // useEffect(() => {
+  //   const timerID = setInterval(() => {
+  //     setCounter(counter => counter + 1)
+  //   }, 1000);
+  //   return () => clearInterval(timerID)
+  // }, [])
 
   // console.log("Counter is running, currently.. ", counter)
 

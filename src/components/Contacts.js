@@ -22,6 +22,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
 
   const [contactsList, setContactsList] = useState([]);
   const [friendAccepted, setFriendAccepted] = useState(false);
+  const [requestSent, setRequestSent] = useState(false);
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
@@ -42,16 +43,17 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
               // If user obj is logged in user, return friend obj.
             } else if (obj.user.username === user.username) {
               return { ...obj.friend, contact_status: obj.contact_status, direction: "request sent" }
-            } else {
-              return null
             }
+            // else {
+            //   return null
+            // }
           })
-          // console.log(mappedContacts);
+          console.log(mappedContacts);
           setContactsList(mappedContacts);
           setNotifications(mappedContacts.reduce((a, c) => a + (!c.contact_status ? 1 : 0), 0));
         }
       });
-  }, [friendAccepted, user]);
+  }, [friendAccepted, user, requestSent]);
 
   function acceptFriendRequest(friendID) {
     fetch(`/contacts/${friendID}`, {
@@ -90,7 +92,7 @@ function Contacts({ user, autoLogin, getConversations, setNotifications }) {
         {/* <TableBody> */}
         {/* <CardHeader title="My Contacts" /> */}
         {/* <Grid item xs={6}> */}
-        <AddContacts contactsList={contactsList} setContactsList={setContactsList} />
+        <AddContacts contactsList={contactsList} setContactsList={setContactsList} requestSent={requestSent} setRequestSent={setRequestSent} />
         {/* </Grid> */}
         <Button
           variant="contained"
